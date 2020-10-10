@@ -47,8 +47,13 @@ class User(AbstractUser):
     city = models.CharField(max_length=50)
     state = models.CharField(max_length=50)
     pincode = models.CharField(max_length=6)
+    creation_date = models.DateTimeField(auto_now_add=True)
 
     objects = UserManager()
 
     USERNAME_FIELD = 'mobile'
     REQUIRED_FIELDS = ['first_name']
+
+    class Meta:
+        verbose_name = 'User'
+        verbose_name_plural = 'Users'

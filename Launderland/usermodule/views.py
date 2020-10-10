@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.decorators import login_required
 
+from .decorators import *
 from .models import *
 from .forms import *
 
@@ -27,26 +28,48 @@ def account_signin(request):
         mobile = form.cleaned_data.get('mobile')
         password = form.cleaned_data.get('password')
         user = authenticate(request, mobile=mobile, password=password)
+        next_link = request.GET.get('next', None)
+        print(next_link)
         if user is not None:
             messages.success(request, "Logged In successfully!")
             login(request, user)
             if user.user_type in (1, 2):
-                return redirect('seller_home')
+                if next_link:
+                    return redirect(next_link)
+                else:
+                    return redirect('staff_home')
             if user.user_type == 3:
-                return redirect('homepage')
+                if next_link:
+                    return redirect(next_link)
+                else:
+                    return redirect('homepage')
         else:
             messages.error(request, "Invalid Mobile number or Password!!!")
     return render(request, 'usermodule/signin.html', {'form': form})
 
 
 @login_required
-def customer_signout(request):
+def account_signout(request):
     logout(request)
     return redirect('homepage')
 
 
+@user_is_admin
+def staff_signup(request):
+    myForm = SignupForm(request.POST or None)
+    if myForm.is_valid():
+        user_obj = myForm.save(commit=False)
+        user_obj.password = make_password(user_obj.password)
+        user_obj.user_type = 2
+        user_obj.save()
+        return redirect('demo')
+    staff_obj = User.objects.filter(user_type=2)
+    context = {'form': myForm, 'staff': staff_obj, }
+    return render(request, 'ownersapp/staff_details.html', context=context)
+
+
 @login_required
-def customer_profile(request):
+def account_profile(request):
     instance = User.objects.get(id=request.user.id)
     form = MyaccountForm(request.POST or None, instance=instance)
     if form.is_valid():
