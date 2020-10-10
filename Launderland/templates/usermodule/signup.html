@@ -1,0 +1,92 @@
+{% extends 'base_layout.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+<title>Launder land | Sign Up</title>
+{% endblock %}
+
+{% block content %}
+
+<body id="login_body">
+    <!-- ? Sign Up Form -->
+    <article class="container my- px-sm-1">
+        <div class="card brown d-flex justify-content-center align-items-center bg-transparent border-0">
+            <div class="card-header text-center border-bottom-0 bg-transparent">
+                <h5 class="clamp_size_header">Sign Up</h5>
+            </div>
+            <div class="card-body bg_light_orange_2 rounded">
+                <form method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+                    <!-- * Showcase Image -->
+                    <div class="d-flex align-items-center justify-content-around mb-5">
+                        <img src="{% static 'images/profile.png' %}" class="rounded-circle bg-white text-center"
+                            id="img-cust" alt="profile" style="width: 100px; height: 100px; border: 5px solid white" />
+                    </div>
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="input-group col-md-12 mb-3">
+                            <div class="custom-file">
+                                {{ form.profile_pic|as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="form-group bold col-md-12">Personal Details :</div>
+                        <div class="form-group col-md-6">
+                            {{ form.first_name|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ form.last_name|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ form.email|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ form.mobile|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ form.password|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ form.confirm_password|as_crispy_field }}
+                        </div>
+                        <div class="form-group bold col-md-12">Address Details :</div>
+                        <div class="form-group col-md-12">
+                            {{ form.address|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ form.street|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ form.city|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ form.state|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ form.pincode|as_crispy_field }}
+                        </div>
+                    </div>
+                    <button type="submit" class="btn bg_orange_1 btn-cust btn-block mb-3">
+                        Register
+                    </button>
+                </form>
+            </div>
+        </div>
+    </article>
+
+    <script>
+        $(document).ready(function () {
+            $("#id_profie_pic").change(function () {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#img-cust').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+        });
+    </script>
+</body>
+
+{% endblock %}

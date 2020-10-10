@@ -1,0 +1,49 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% block title %} {% endblock %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous" />
+    <!-- Font : QuickSans -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet" />
+    <!-- Animate css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
+    <!-- Website Icon -->
+    <link rel="icon" href="{% static 'images/logo.png' %}" />
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+
+
+<body>
+
+    <header>
+        {% include 'messages.html' %}
+        <!-- Header -->
+        {% include 'header.html' %}
+    </header>
+    <main>
+        <!-- Main Content -->
+        {% block content %} {% endblock %}
+    </main>
+    <footer class="pt-4 mt-5 pt-md-5 border-top bg_orange_1 ">
+        <!-- Footer -->
+        {% include 'footer.html' %}
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+{% load static %}
+{% url 'homepage' as home %}
+{% url 'usermodule:signout' as signout %}
+{% url 'usermodule:signin' as signin %}
+{% url 'usermodule:signup' as signup %}
+{% url 'usermodule:myaccount' as myaccount %}
+
+<div>
+    <!-- ? Logo Navbar -->
+    <nav class="navbar navbar-expand-lg bg_orange_1">
+        <div class="container mx_width_100 justify-content-between">
+            <!-- * Brand Logo -->
+            <a class="navbar-brand flex-shrink-0 btn-cust d-flex" href="{% url 'homepage' %}"
+                style="min-width: 7rem"><img src="{% static 'images/logo.png' %}" alt="Horbax" width="45" />
+                <h6 class="my-auto ml-2 brown bold">Launder land</h6>
+            </a>
+            <div class="container order-1 order-lg-0">
+                <div class="navbar-collapse collapse d-lg-flex justify-content-center align-items-center"
+                    id="navbarCollapse">
+                    <!-- * Primary menu-->
+                    <ul class="navbar-nav">
+                        <li class="nav-item my-2 mx-lg-3 clamp_size">
+                            <a class="{% if request.get_full_path == home %}actives{% else %}brown{% endif %} nav-link border-0 btn-cust text-center header_big"
+                                href="{% url 'homepage' %}">Home</a>
+                        </li>
+                        {% if user.is_authenticated %}
+                        <li class="nav-item my-2 mx-lg-3 clamp_size">
+                            <a class="{% if request.get_full_path == myaccount %}actives{% else %}brown{% endif %} nav-link header_big border-0 btn-cust text-center"
+                                href="{% url 'usermodule:myaccount' %}">Accounts</a>
+                        </li>
+                        {% endif %}
+                        <li class="nav-item my-2 mx-lg-3 clamp_size">
+                            <a class="brown nav-link header_big border-0 btn-cust text-center" href="#">About Us</a>
+                        </li>
+                        <li class="nav-item my-2 mx-lg-3 clamp_size">
+                            <a class="brown nav-link header_big border-0 btn-cust text-center" href="#">Feedback</a>
+                        </li>
+                        {% if user.is_authenticated %}
+                        <li class="nav-item my-2 mx-lg-3 clamp_size d-md-none">
+                            <a class="brown nav-link header_big border-0 btn-cust text-center"
+                                href="#">Sign&nbsp;Out</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item my-2 mx-lg-3 clamp_size d-md-none">
+                            <a class="{% if request.get_full_path == signin %}actives{% else %}brown{% endif %} nav-link header_big border-0 btn-cust text-center"
+                                href="{% url 'usermodule:signin' %}">Sign&nbsp;In</a>
+                        </li>
+                        <li class="nav-item my-2 mx-lg-3 clamp_size d-md-none">
+                            <a class="{% if request.get_full_path == signup %}actives{% else %}brown{% endif %} nav-link header_big border-0 btn-cust text-center"
+                                href="{% url 'usermodule:signup' %}">Sign&nbsp;Up</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+            <!-- Right Side -->
+            <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center order-0 orderlg-1">
+                {% if user.is_authenticated %}
+                <!-- * My Account -->
+                <div class="nav-item dropdown d-flex order-md-2">
+                    <a class="navbar-tool mx-sm-1 mx-md-0 text-decoration-none btn-cust" href="">
+                        <div class="navbar-tool-icon-box">
+                            <img class="rounded-circle" src="{{ user.profile_pic.url }}" width="35"
+                                style="border: 2px solid white" alt="Profile" />
+                        </div>
+                    </a>
+                    <a class="nav-link dropdown-toggle btn-cust d-none d-md-block px-1
+              {% if request.get_full_path == profile %}active{% else %}brown{% endif %}" href="#" id="navbardrop"
+                        data-toggle="dropdown">
+                        {{ user.first_name }}
+                    </a>
+                    <div class="dropdown-menu bg_light_orange_1">
+                        <a href="{% url 'usermodule:myaccount' %}" class="dropdown-item">
+                            <i class="fas fa-user"></i>&nbsp;My&nbsp;Account
+                        </a>
+                        <a href="{% url 'usermodule:signout' %}" class="dropdown-item">
+                            <i class="fas fa-sign-out-alt"></i>&nbsp;Sign&nbsp;Out
+                        </a>
+                    </div>
+                </div>
+                {% else %}
+                <div class="navbar-tool btn-cust d-none d-md-block">
+                    <a class="{% if request.get_full_path == signin %}actives{% else %}brown{% endif %} nav-link border-0 btn-cust"
+                        href="{% url 'usermodule:signin' %}">Sign&nbsp;In</a>
+                </div>
+                <div class="navbar-tool btn-cust d-none d-md-block">
+                    <a class="{% if request.get_full_path == signup %}actives{% else %}brown{% endif %} nav-link border-0 btn-cust"
+                        href="{% url 'usermodule:signup' %}">Sign&nbsp;Up</a>
+                </div>
+                {% endif %}
+                <!-- * Hamburger Button-->
+                <button class="navbar-toggler collapsed btn btn-cust order-md-3" type="button" data-toggle="collapse"
+                    data-target="#navbarCollapse" aria-expanded="false">
+                    <i class="fas fa-bars fa-lg brown"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <!-- ? Navbar Menus -->
+    <!-- <nav class="navbar navbar-expand-lg navbar-stuck-menu mt-n2 pt-0 pb-2 px-0 bg_orange_1">
+
+    </nav> -->
+</div>
