@@ -8,9 +8,10 @@ from .views import *
 
 
 urlpatterns = [
-    path('superadmin/', admin.site.urls),
     path('', homepage, name="homepage"),
+    path('superadmin/', admin.site.urls),
     path('accounts/', include('usermodule.urls')),
+    path('laundry/', include('laundry.urls')),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

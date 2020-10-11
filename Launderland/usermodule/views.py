@@ -54,7 +54,7 @@ def account_signout(request):
     return redirect('homepage')
 
 
-@user_is_admin
+@user_is_owner
 def staff_signup(request):
     myForm = SignupForm(request.POST or None)
     if myForm.is_valid():
