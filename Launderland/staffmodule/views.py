@@ -1,5 +1,5 @@
+from usermodule.models import User
 from django.contrib import messages
-from django.http import request
 from django.shortcuts import get_object_or_404, render, redirect
 
 from .forms import *
@@ -13,7 +13,7 @@ def staff_homepage(request):
 
 
 @user_is_staff
-def service(request):
+def service_view(request):
     services = Service.objects.all()
     form = ServiceForm(request.POST or None)
     if form.is_valid():
@@ -50,3 +50,15 @@ def service_delete(request, id):
     service.delete()
     messages.success(request, 'Deleted successfully!!!')
     return redirect('staffmodule:service')
+
+
+@user_is_staff
+def staff_list(request):
+    staffs = User.objects.filter(user_type=2)
+    return render(request, 'staffmodule/staff_list.html', {'staffs': staffs})
+
+
+@user_is_staff
+def staff_details(request, id):
+    staff = get_object_or_404(User, id=id)
+    return render(request, 'staffmodule/staff_detail.html', {'staff': staff})

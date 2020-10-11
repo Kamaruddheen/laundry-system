@@ -1,0 +1,87 @@
+{% extends 'base_layout.html' %}
+{% load static %}
+
+{% block title %}
+<title>Launder land | Staff Details</title>
+{% endblock %}
+
+{% block content %}
+
+<body id="staff_stuffs">
+    <!-- ? Staff Details Title -->
+
+    <article class="bg_light_orange_2 container-fluid py-2">
+        <section class="pr-md-auto pl-md-5 text-center text-md-left">
+            <h3 class="brown mb-0 clamp_size_header">Staff Detail</h3>
+        </section>
+    </article>
+
+    <article class="container p-0">
+        <!-- ? Image + details -->
+        <div class="bg-light box-shadow-lg rounded-lg px-4 py-3 my-5 bg_light_orange_1">
+            <div class="px-lg-3">
+                <div class="row">
+                    <!-- ? Staff Image -->
+                    <section class="col-12 col-md-4 col-lg-3 px-0">
+                        <div class="mx-auto d-flex justify-content-center mb-4">
+                            <img src="{{ staff.profile_pic.url }}" class="rounded-circle" width="220"
+                                alt="{{ staff.first_name }}" />
+                        </div>
+                    </section>
+                    <!-- ? Staff Details -->
+                    <section class="col-12 col-md-8 col-lg-9">
+                        <div class="card border-0">
+                            <div class="card-body brown rounded">
+                                <h4 class="h4 bold">{{ staff.last_name }}, {{ staff.first_name }}</h4>
+                                <small>{% if staff.user_type == 2 %}Staff{% elif staff.user_type == 3 %}{% endif %}</small>
+                                <table class="table brown borderless">
+                                    <tbody>
+                                        <tr>
+                                            <th class="px-0" scope="row">Mobile</th>
+                                            <th>:</th>
+                                            <td class="px-0">+91 {{ staff.mobile }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="px-0" scope="row">Email</th>
+                                            <th>:</th>
+                                            <td class="px-0">{{staff.email}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="px-0 pb-0" scope="row">Address</th>
+                                            <th class="pb-0">:</th>
+                                            <td class="px-0 pb-0">
+                                                {% for addr in staff.address.split %}{{addr}}{% endfor %}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="px-0" scope="row"></th>
+                                            <th></th>
+                                            <td class="p-0">{{staff.street}},</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="px-0" scope="row"></th>
+                                            <th></th>
+                                            <td class="p-0">{{staff.city}},</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="px-0" scope="row"></th>
+                                            <th></th>
+                                            <td class="p-0">{{staff.state}}.</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="px-0" scope="row"></th>
+                                            <th></th>
+                                            <td class="p-0">{{staff.pincode}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </article>
+</body>
+
+{% endblock %}
