@@ -1,0 +1,39 @@
+{% extends 'base_layout.html' %}
+{% load static %}
+
+{% block title %}
+<title>Launder land | Customer List</title>
+{% endblock %}
+
+{% block content %}
+
+<body id="customer_stuffs">
+    <!-- ? Customer List Title -->
+    <article class="bg_light_orange_2 container-fluid py-2">
+        <section class="pr-md-auto pl-md-5 text-center text-md-left">
+            <h3 class="brown mb-0 clamp_size_header">Customers</h3>
+        </section>
+    </article>
+    <article class="container-fluid my-2">
+        <div class="row d-flex justify-content-center">
+            {% for customer in customers %}
+            <section class="card bg-transparent border-0 m-2" style="width: 18rem;">
+                <div class="mx-auto img_body d-flex">
+                    <img src="{{ customer.profile_pic.url }}" class="rounded-circle mb-n5" width="95"
+                        alt="{{ customer.first_name }} image" style="z-index:500">
+                </div>
+                <div class="card-body bg_light_orange_1 text-center brown rounded">
+                    <h5 class="card-title pt-5">{{ customer.first_name }}</h5>
+                    <h5 class="card-title">{{ customer.email }}</h5>
+                    <h5 class="card-title">{{ customer.mobile }}</h5>
+                    <a href="{% url 'customermodule:customer_details' customer.id %}"
+                        class="btn btn-cust bg_orange_1 rounded-pill brown bold">View
+                        Details</a>
+                </div>
+            </section>
+            {% endfor %}
+        </div>
+    </article>
+</body>
+
+{% endblock %}
