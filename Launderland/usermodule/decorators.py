@@ -9,9 +9,9 @@ def user_is_customer(function):
                 return function(request, *args, **kwargs)
             else:
                 messages.warning(request, 'Login using Customer Account')
-                return redirect(redirect('signin').url+'?next='+request.path)
+                return redirect(redirect('usermodule:signin').url+'?next='+request.path)
         else:
-            return redirect(redirect('signin').url+'?next='+request.path)
+            return redirect(redirect('usermodule:signin').url+'?next='+request.path)
     wrap.__doc__ = function.__doc__
     wrap.__name__ = function.__name__
     return wrap
@@ -24,10 +24,10 @@ def user_is_staff(function):
                 return function(request, *args, **kwargs)
             else:
                 messages.warning(request, 'Login using Staff Account')
-                return redirect(redirect('signin').url+'?next='+request.path)
+                return redirect(redirect('usermodule:signin').url+'?next='+request.path)
         else:
             messages.info(request, 'Login to continue')
-            return redirect(redirect('signin').url+'?next='+request.path)
+            return redirect(redirect('usermodule:signin').url+'?next='+request.path)
     wrap.__doc__ = function.__doc__
     wrap.__name__ = function.__name__
     return wrap
@@ -40,10 +40,10 @@ def user_is_owner(function):
                 return function(request, *args, **kwargs)
             else:
                 messages.warning(request, 'Login using Owner Account')
-                return redirect(redirect('signin').url+'?next='+request.path)
+                return redirect(redirect('usermodule:signin').url+'?next='+request.path)
         else:
             messages.info(request, 'Login to continue')
-            return redirect(redirect('signin').url+'?next='+request.path)
+            return redirect(redirect('usermodule:signin').url+'?next='+request.path)
     wrap.__doc__ = function.__doc__
     wrap.__name__ = function.__name__
     return wrap

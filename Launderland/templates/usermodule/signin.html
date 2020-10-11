@@ -16,7 +16,7 @@
                 <h5 class="clamp_size_header">Sign In</h5>
             </div>
             <div class="card-body mx-md-auto col-md-7 bg_light_orange_2 rounded">
-                <form method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+                <form method="POST" class="needs-validation" novalidate>
                     {% csrf_token %}
                     {{ form|crispy }}
                     <button type="submit" class="btn bg_orange_1 btn-cust float-right btn-block mb-3">

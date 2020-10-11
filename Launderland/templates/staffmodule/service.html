@@ -1,0 +1,133 @@
+{% extends 'base_layout.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}
+<title>Launder land | Services</title>
+{% endblock %}
+
+{% block content %}
+
+<body id="staff">
+    <!-- ? Cart Title -->
+    <article class="bg_light_orange_2 container-fluid py-2">
+        <section class="pr-md-auto pl-md-5 text-center text-md-left">
+            <h3 class="brown mb-0 clamp_size_header">Services</h3>
+        </section>
+    </article>
+    <!-- ? List of Services -->
+    <article class="container my-2">
+        {% if user.user_type == 1 %}
+        <!-- Modal -->
+        <article class="modal fade" id="add_service_modal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+            role="dialog" aria-labelledby="staticBackdropLabel" aria-modal="true">
+            <div class="modal-dialog d-flex justfy-content-center align-items-center" style="height: 90vh;">
+                <div class="modal-content">
+                    <section class="modal-header bg_light_orange_2 brown">
+                        <h5 class="modal-title" id="exampleModalLabel">Add a Service</h5>
+                        <button type="button" class="btn btn-cust close" data-dismiss="modal" aria-label="Close">×
+                        </button>
+                    </section>
+                    <!-- Add Service Form -->
+                    <section class="modal-body bg_light_orange_1">
+                        <form id="add_form" method="POST" role="form" class="brown">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                        </form>
+                    </section>
+                    <!-- Add Service Button -->
+                    <section class="modal-footer brown bg_light_orange_2">
+                        <button type="cancel" class="btn btn-cust btn-warning bold" data-dismiss="modal">Cancel</button>
+                        <input type="submit" name="submit" value="Add" form="add_form"
+                            class="btn btn-cust btn-success bold">
+                    </section>
+                </div>
+            </div>
+        </article>
+        <!-- Add modal toggle button -->
+        <button type="button" class="btn-cust bg_light_orange_1 brown btn float-right my-2" id="add_service"
+            data-toggle="modal" data-target="#add_service_modal">Add <i class="fas fa-plus brown"></i>
+        </button>
+        {% endif %}
+        <section class="card shadow-sm my-3 w-100">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover mb-0 brown">
+                        <!-- * Table Header -->
+                        <thead class="bg_light_orange_2">
+                            <tr>
+                                <th scope="col">No.</th>
+                                <th scope="col">Services</th>
+                                {% if user.user_type == 1 %}
+                                <th scope="col"></th>
+                                {% endif %}
+                                <!-- <th scope="col"></th> -->
+                            </tr>
+                        </thead>
+                        <!-- * Table Content -->
+                        <tbody>
+                            {% for data in services %}
+                            <tr>
+                                {% if forloop %}
+                                <th>{{forloop.counter}}</th>
+                                {% endif %}
+                                <!-- <td>{{ data.service }}</td> -->
+                                <td>
+                                    <form id="edit_form{{ data.id }}" method="POST"
+                                        action="{% url 'staffmodule:service_edit' data.id %}">
+                                        {% csrf_token %}
+                                        <input type="text" name="service" class="form-control"
+                                            value="{{ data.service }}">
+                                    </form>
+                                </td>
+                                {% if user.user_type == 1 %}
+                                <td class="text-right">
+                                    <input type="submit" form="edit_form{{ data.id }}" value="Edit"
+                                        class="btn btn-cust blue bold">
+                                    <input type="button" name="submit" value="Delete" class="btn btn-cust red bold"
+                                        data-toggle="modal" data-target="#del{{ data.id }}">
+                                </td>
+                                {% endif %}
+                            </tr>
+                            <!-- Delete A Service  -->
+                            <div class="modal fade" id="del{{ data.id }}" data-backdrop="static" data-keyboard="false"
+                                tabindex="-1">
+                                <div class="modal-dialog d-flex justfy-content-center align-items-center"
+                                    style="height: 90vh;">
+                                    <div class="modal-content brown">
+                                        <section class="modal-header bg_light_orange_1">
+                                            <h4 class="modal-title bold">Confirmation</h4>
+                                            <button type="button" class="btn-cust close"
+                                                data-dismiss="modal">&times;</button>
+                                        </section>
+                                        <section class="modal-body">
+                                            <h4 class="modal-title">Are you sure you want to delete?</h4>
+                                            <h5 class="bold my-2">{{ data.service }}</h5>
+                                        </section>
+                                        <section class="modal-footer bg_light_orange_1">
+                                            <a href="{% url 'staffmodule:service_delete' data.id %}"
+                                                class="btn btn-cust red">Yes,&nbsp;Delete</a>
+                                            <button type="button" class="btn btn-cust btn-warning"
+                                                data-dismiss="modal">Cancel</button>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </article>
+
+    <script>
+        $(document).ready(function () {
+            $("#add_service").click(function () {
+                $("#add_service_modal").modal("show");
+            })
+        });
+    </script>
+</body>
+
+{% endblock %}

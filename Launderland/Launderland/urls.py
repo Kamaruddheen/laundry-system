@@ -12,6 +12,7 @@ urlpatterns = [
     path('superadmin/', admin.site.urls),
     path('accounts/', include('usermodule.urls')),
     path('laundry/', include('laundry.urls')),
+    path('staff/', include('staffmodule.urls')),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

@@ -98,6 +98,14 @@
     color: #ff0000 !important;
   }
   
+  .blue{
+    color: #0000ff !important;
+  }
+
+  .yellow{
+    color: #ffff00 !important;
+  }
+
   /* background colors */
   
   .bg_brown {
@@ -229,4 +237,8 @@
 
 #accounts {
   background-color: #ebe2d7;
+}
+
+#staff {
+  background-color: #e9e9e9;
 }

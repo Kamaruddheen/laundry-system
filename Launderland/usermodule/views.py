@@ -20,6 +20,7 @@ def customer_signup(request):
     return render(request, 'usermodule/signup.html', {'form': form})
 
 
+# Common signin for all account
 def account_signin(request):
     if request.user.is_authenticated:
         return redirect('homepage')
@@ -37,7 +38,7 @@ def account_signin(request):
                 if next_link:
                     return redirect(next_link)
                 else:
-                    return redirect('staff_home')
+                    return redirect('staffmodule:staff_homepage')
             if user.user_type == 3:
                 if next_link:
                     return redirect(next_link)
@@ -65,7 +66,7 @@ def staff_signup(request):
         return redirect('demo')
     staff_obj = User.objects.filter(user_type=2)
     context = {'form': myForm, 'staff': staff_obj, }
-    return render(request, 'ownersapp/staff_details.html', context=context)
+    return render(request, 'staffmodule/staff_details.html', context=context)
 
 
 @login_required
