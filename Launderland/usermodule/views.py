@@ -32,17 +32,18 @@ def account_signin(request):
         next_link = request.GET.get('next', None)
         print(next_link)
         if user is not None:
-            messages.success(request, "Logged In successfully!")
             login(request, user)
             if user.user_type in (1, 2):
                 if next_link:
                     return redirect(next_link)
                 else:
+                    messages.success(request, "Signed In as Staff")
                     return redirect('staffmodule:staff_homepage')
             if user.user_type == 3:
                 if next_link:
                     return redirect(next_link)
                 else:
+                    messages.success(request, "Signed In as Customer")
                     return redirect('homepage')
         else:
             messages.error(request, "Invalid Mobile number or Password!!!")
@@ -52,23 +53,23 @@ def account_signin(request):
 @login_required
 def account_signout(request):
     logout(request)
+    messages.error(request, "Signed out successfully!!!")
     return redirect('homepage')
 
 
 @user_is_owner
 def staff_signup(request):
-    myForm = SignupForm(request.POST or None)
-    if myForm.is_valid():
-        user_obj = myForm.save(commit=False)
+    form = SignupForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        user_obj = form.save(commit=False)
         user_obj.password = make_password(user_obj.password)
         user_obj.user_type = 2
         user_obj.save()
-        return redirect('demo')
-    staff_obj = User.objects.filter(user_type=2)
-    context = {'form': myForm, 'staff': staff_obj, }
-    return render(request, 'staffmodule/staff_details.html', context=context)
+        return redirect('staffmodule:staff_homepage')
+    return render(request, 'staffmodule/staff_signup.html', {'form': form})
 
 
+# Common account detail
 @login_required
 def account_profile(request):
     instance = User.objects.get(id=request.user.id)

@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.http import request
 from django.shortcuts import get_object_or_404, render, redirect
 
 from .forms import *
@@ -43,7 +44,7 @@ def service_edit(request, id):
         return redirect('homepage')
 
 
-@ user_is_owner
+@user_is_owner
 def service_delete(request, id):
     service = get_object_or_404(Service, id=id)
     service.delete()

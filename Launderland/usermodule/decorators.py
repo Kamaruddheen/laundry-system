@@ -8,7 +8,7 @@ def user_is_customer(function):
             if request.user.user_type == 3:
                 return function(request, *args, **kwargs)
             else:
-                messages.warning(request, 'Login using Customer Account')
+                messages.warning(request, 'Signin using Customer Account')
                 return redirect(redirect('usermodule:signin').url+'?next='+request.path)
         else:
             return redirect(redirect('usermodule:signin').url+'?next='+request.path)
@@ -23,10 +23,10 @@ def user_is_staff(function):
             if request.user.user_type == 2 or request.user.user_type == 1:
                 return function(request, *args, **kwargs)
             else:
-                messages.warning(request, 'Login using Staff Account')
+                messages.warning(request, 'Signin using Staff Account')
                 return redirect(redirect('usermodule:signin').url+'?next='+request.path)
         else:
-            messages.info(request, 'Login to continue')
+            messages.info(request, 'Signin to continue')
             return redirect(redirect('usermodule:signin').url+'?next='+request.path)
     wrap.__doc__ = function.__doc__
     wrap.__name__ = function.__name__
@@ -39,10 +39,10 @@ def user_is_owner(function):
             if request.user.user_type == 1:
                 return function(request, *args, **kwargs)
             else:
-                messages.warning(request, 'Login using Owner Account')
+                messages.warning(request, 'Signin using Owner Account')
                 return redirect(redirect('usermodule:signin').url+'?next='+request.path)
         else:
-            messages.info(request, 'Login to continue')
+            messages.info(request, 'Signin to continue')
             return redirect(redirect('usermodule:signin').url+'?next='+request.path)
     wrap.__doc__ = function.__doc__
     wrap.__name__ = function.__name__
