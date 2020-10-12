@@ -235,6 +235,16 @@ body {
   background-color: #e6c2b4;
 }
 
+/* ? Customer Details */
+
+#customer_stuffs {
+  background-color: #ebb729f6;
+}
+
+/* ? table */
+
+/* *borderless table */
+
 .borderless td, .borderless th {
   border: none;
 }
@@ -245,4 +255,11 @@ body {
   max-height: 350px;
   overflow: auto;
   display: inline-block;
+}
+
+/* card hover effect */
+
+.card-cust:hover {
+  box-shadow: var(--dark-shadow);
+  transform: scale(1.06);
 }

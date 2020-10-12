@@ -17,7 +17,7 @@
     <article class="container-fluid my-2">
         <div class="row d-flex justify-content-center">
             {% for customer in customers %}
-            <section class="card bg-transparent border-0 m-2" style="width: 18rem;">
+            <section class="card card-cust bg-transparent border-0 m-2" style="width: 18rem;">
                 <div class="mx-auto img_body d-flex">
                     <img src="{{ customer.profile_pic.url }}" class="rounded-circle mb-n5" width="95"
                         alt="{{ customer.first_name }} image" style="z-index:500">
