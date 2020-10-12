@@ -238,3 +238,11 @@ body {
 .borderless td, .borderless th {
   border: none;
 }
+
+/* table scroll for vertical */
+
+.table-wrapper {
+  max-height: 350px;
+  overflow: auto;
+  display: inline-block;
+}
