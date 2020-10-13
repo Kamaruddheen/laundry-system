@@ -29,7 +29,7 @@ class SignupForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'mobile',
-                  'email', 'password', 'confirm_password', 'profile_pic', 'address', 'street', 'city', 'state', 'pincode']
+                  'email', 'gender', 'password', 'confirm_password', 'profile_pic', 'address', 'street', 'city', 'state', 'pincode']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -37,6 +37,7 @@ class SignupForm(forms.ModelForm):
         self.fields['mobile'].label = "Mobile Number"
         self.fields['email'].label = "Email Address"
         self.fields['first_name'].label = "First Name"
+        self.fields['confirm_password'].label = "Confirm Password"
         self.fields['address'].label = "Address"
         self.fields['street'].label = "Street"
         self.fields['city'].label = "City"
@@ -125,7 +126,7 @@ class MyaccountForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'mobile', 'email',
+        fields = ['first_name', 'last_name', 'mobile', 'email', 'gender',
                   'address', 'street', 'city', 'state', 'pincode']
 
     def __init__(self, *args, **kwargs):

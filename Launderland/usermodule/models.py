@@ -37,9 +37,13 @@ class User(AbstractUser):
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=15)
     profile_pic = models.ImageField(default="profile.png", blank=True)
+    gender_choice = (('Male', 'Male'), ('Female', 'Female'),
+                     ('Other', 'Other'))
+    gender = models.CharField(max_length=7, choices=gender_choice)
     user_type_choice = ((1, 'Owner'), (2, 'Staff'), (3, 'Customer'))
     user_type = models.PositiveSmallIntegerField(
         choices=user_type_choice)
+    staff_status = models.BooleanField(default=False)
     address = models.CharField(max_length=100)
     street = models.CharField(max_length=50)
     city = models.CharField(max_length=50)

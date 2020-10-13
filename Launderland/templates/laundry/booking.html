@@ -1,0 +1,60 @@
+{% extends 'base_layout.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+<title>Launder land | Booking</title>
+{% endblock %}
+
+{% block content %}
+
+<style>
+    #div_id_delivery_type,
+    #div_id_service_on {
+        margin-bottom: 0.5rem;
+    }
+</style>
+
+<body id="staff">
+    <!-- ? Booking FillUp Title -->
+    <article class="bg_light_orange_2 container-fluid py-2">
+        <section class="pr-md-auto pl-md-5 text-center text-md-left">
+            <h3 class="brown mb-0 clamp_size_header">Booking</h3>
+        </section>
+    </article>
+    <!-- ? Sign Up Form -->
+    <article class="container my-2 px-sm-1">
+        <div class="card brown d-flex justify-content-center align-items-center bg-transparent border-0">
+            <div class="card-body bg_light_orange_2 rounded">
+                <form method="POST" class="needs-validation" novalidate>
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            {{ form.load_type|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ form.unit|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-12">
+                            {{ form.services|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ form.delivery_type|as_crispy_field }}
+                            <small>Do you wanna drop and pick it yourself or shall we?</small>
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ form.service_on|as_crispy_field }}
+                            <small>Usually we will finish it within 3 day.</small>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn bg_orange_1 btn-cust btn-block mb-3">
+                        Book Now
+                    </button>
+                </form>
+            </div>
+        </div>
+    </article>
+</body>
+
+
+{% endblock %}

@@ -4,6 +4,7 @@
 {% url 'usermodule:signin' as signin %}
 {% url 'usermodule:signup' as signup %}
 {% url 'usermodule:myaccount' as myaccount %}
+{% url 'laundry:laundry' as laundry %}
 
 <div>
     <!-- ? Logo Navbar -->
@@ -23,17 +24,18 @@
                             <a class="{% if request.get_full_path == home %}actives{% else %}brown{% endif %} nav-link border-0 btn-cust text-center header_big"
                                 href="{% url 'homepage' %}">Home</a>
                         </li>
+                        <li class="nav-item my-2 mx-lg-3 clamp_size">
+                            <a class="{% if request.get_full_path == laundry %}actives{% else %}brown{% endif %} nav-link header_big border-0 btn-cust text-center"
+                                href="{% url 'laundry:laundry' %}">Laundry</a>
+                        </li>
                         {% if user.is_authenticated %}
                         <li class="nav-item my-2 mx-lg-3 clamp_size">
                             <a class="{% if request.get_full_path == myaccount %}actives{% else %}brown{% endif %} nav-link header_big border-0 btn-cust text-center"
-                                href="{% url 'usermodule:myaccount' %}">Accounts</a>
+                                href="{% url 'usermodule:myaccount' %}">Account</a>
                         </li>
                         {% endif %}
                         <li class="nav-item my-2 mx-lg-3 clamp_size">
                             <a class="brown nav-link header_big border-0 btn-cust text-center" href="#">About Us</a>
-                        </li>
-                        <li class="nav-item my-2 mx-lg-3 clamp_size">
-                            <a class="brown nav-link header_big border-0 btn-cust text-center" href="#">Feedback</a>
                         </li>
                         {% if user.is_authenticated %}
                         <li class="nav-item my-2 mx-lg-3 clamp_size d-md-none">
