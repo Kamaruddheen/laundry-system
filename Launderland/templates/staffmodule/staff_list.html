@@ -15,6 +15,7 @@
         </section>
     </article>
     <article class="container-fluid my-2">
+        {% if staffs %}
         <div class="row d-flex justify-content-center">
             {% for staff in staffs %}
             <section class="card card-cust bg-transparent border-0 m-2" style="width: 18rem;">
@@ -32,7 +33,11 @@
                 </div>
             </section>
             {% endfor %}
-        </div>
+            {% else %}
+            <div class="row d-flex justify-content-center align-items-center" style="height: 50vh;">
+                <h4 class="bold brown"> No Staffs to View</h4>
+                {% endif %}
+            </div>
     </article>
 </body>
 

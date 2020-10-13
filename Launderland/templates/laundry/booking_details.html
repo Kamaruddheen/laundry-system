@@ -1,0 +1,119 @@
+{% extends 'base_layout.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+<title>Launder land | Booking Details</title>
+{% endblock %}
+
+{% block content %}
+
+<body id="booking">
+    <!-- ? Booking Details Title -->
+    <article class="bg_light_orange_2 container-fluid py-2">
+        <section class="pr-md-auto pl-md-5 text-center text-md-left">
+            <h3 class="brown mb-0 clamp_size_header">Booking Details</h3>
+        </section>
+    </article>
+    <article class="container p-0">
+        <div class="bg-light box-shadow-lg rounded-lg px-4 py-3 my-5 bg_light_orange_1">
+            <div class="px-lg-3">
+                <div class="row">
+                    <!-- ? Staff Detail -->
+                    <section class="col-12 col-md-4 col-lg-3 px-0 brown text-center">
+                        <h3 class="mb-2">Staff Details</h3>
+                        <div class="mx-auto d-flex justify-content-center mb-4">
+                            <img src="{{ booking.assigned_staff.profile_pic.url }}" class="rounded-circle" width="130"
+                                alt="{{ booking.assigned_staff.first_name }}" />
+                        </div>
+                        <div>
+                            <small>Name : {{ booking.assigned_staff.first_name }}</small>
+                        </div>
+                        <div>
+                            <small>Contact : {{ booking.assigned_staff.mobile }}</small>
+                        </div>
+                    </section>
+                    <!-- ? Booking Details -->
+                    <section class="col-12 col-md-8 col-lg-9">
+                        <div class="card border-0">
+                            <div class="card-body brown rounded">
+                                <h5 class="card-title float-right badge rounded-pill
+                                    {% if booking.status == 'delivered' %}
+                                    badge-success
+                                    {% elif booking.status == 'ready' %}
+                                    badge-info
+                                    {% elif booking.status == 'pickedup' %}
+                                    badge-primary
+                                    {% elif booking.status == 'pending' %}
+                                    badge-warning
+                                    {% elif booking.status == 'canceled' %}
+                                    badge-danger
+                                    {% endif %}">
+                                    {{ booking.status }}
+                                </h5>
+                                <table class="table brown borderless">
+                                    <thead>
+                                        <tr>
+                                            <th class="px-0" scope="row">Scheduled On:</th>
+                                            <th>:</th>
+                                            <td>{{ booking.service_on }}
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th class="px-0" scope="row"> Requested Services</th>
+                                            <th>:</th>
+                                            {% for ss in booking.services.all %}
+                                            <td class="badge badge-dark badge-pill py-1 mx-1">{{ ss }}</td>
+                                            {% endfor %}
+                                        </tr>
+                                        <tr>
+                                            <th class="px-0" scope="row">Load Type</th>
+                                            <th>:</th>
+                                            <td class="px-0">{{ booking.load_type }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="px-0" scope="row">Unit</th>
+                                            <th>:</th>
+                                            <td class="px-0">{{ booking.unit }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="px-0" scope="row">Delivery Type</th>
+                                            <th>:</th>
+                                            <td class="px-0">
+                                                {{ booking.delivery_type }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="px-0" scope="row">Amount</th>
+                                            <th>:</th>
+                                            <td class="px-0">
+                                                &#x20B9; {{ booking.amount|default:"----" }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="px-0" scope="row">Booked On</th>
+                                            <th>:</th>
+                                            <td class="px-0">
+                                                {{ booking.booked_on }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="px-0" scope="row">Delivered On</th>
+                                            <th>:</th>
+                                            <td class="px-0">
+                                                {{ booking.delivered_on|default:"--/--/----" }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </article>
+</body>
+{% endblock %}

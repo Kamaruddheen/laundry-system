@@ -33,3 +33,6 @@ class Booking(models.Model):
     class Meta:
         verbose_name = 'Booking'
         verbose_name_plural = 'Bookings'
+
+    def __str__(self):
+        return self.cust_id.last_name + ", " + self.cust_id.first_name

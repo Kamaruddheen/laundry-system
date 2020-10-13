@@ -1,0 +1,61 @@
+{% extends 'base_layout.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+<title>Launder land | My Bookings</title>
+{% endblock %}
+
+{% block content %}
+
+<body id="booking">
+    <!-- ? My Bookings Title -->
+    <article class="bg_light_orange_2 container-fluid py-2">
+        <section class="pr-md-auto pl-md-5 text-center text-md-left">
+            <h3 class="brown mb-0 clamp_size_header">My Bookings</h3>
+        </section>
+    </article>
+    <article class="container-fluid my-2">
+        {% if bookings %}
+        <div class="row d-flex justify-content-center">
+            {% for book in bookings %}
+            <section class="card card-cust bg-transparent border-0 m-2" style="width: 18rem;">
+                <div class="mx-auto img_body d-flex d-non">
+                    <img src="{{ book.assigned_staff.profile_pic.url }}" class="rounded-circle mb-n5 d-non" width="95"
+                        alt="{{ book.assigned_staff.first_name }} image" style="z-index:500">
+                </div>
+                <div class="card-body bg_light_orange_1 text-center brown rounded">
+                    <h5 class="card-title pt-5">Incharge : {{ book.assigned_staff.first_name }}</h5>
+                    <h5 class="card-title">Contact : {{ book.assigned_staff.mobile }}</h5>
+                    <a href="{% url 'laundry:booking_details' book.id %}"
+                        class="btn btn-cust btn-sm bg_orange_1 rounded-pill brown bold">View
+                        Details</a>
+                </div>
+                <div class="card-footer bg_light_orange_1 brown">
+                    <span class="">Amount : &#x20B9; {{ book.amount|default:"----" }}</span>
+                    <span class="badge float-right rounded-pill mb-0
+                    {% if book.status == 'delivered' %}
+                    badge-success
+                    {% elif book.status == 'ready' %}
+                    badge-info
+                    {% elif book.status == 'pickedup' %}
+                    badge-primary
+                    {% elif book.status == 'pending' %}
+                    badge-warning
+                    {% elif book.status == 'canceled' %}
+                    badge-danger
+                    {% endif %}
+                    ">{{ book.status }}</span>
+                </div>
+            </section>
+            {% endfor %}
+            {% else %}
+            <div class="row d-flex justify-content-center align-items-center" style="height: 50vh;">
+                <h4 class="bold brown"> You haven't booked anything</h4>
+                {% endif %}
+            </div>
+    </article>
+
+</body>
+
+{% endblock %}

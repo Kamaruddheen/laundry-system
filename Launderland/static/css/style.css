@@ -241,12 +241,16 @@ body {
   background-color: #ebb729f6;
 }
 
+#booking{
+  background-color: #ffefe2f6;
+}
+
 /* ? table */
 
 /* *borderless table */
 
-.borderless td, .borderless th {
-  border: none;
+.borderless td, .borderless th, .borderless thead, .borderless tr,.borderless tbody {
+  border: none !important;
 }
 
 /* table scroll for vertical */
