@@ -26,10 +26,10 @@
                             <img src="{{ booking.assigned_staff.profile_pic.url }}" class="rounded-circle" width="130"
                                 alt="{{ booking.assigned_staff.first_name }}" />
                         </div>
-                        <div>
+                        <div class="my-2">
                             <small>Name : {{ booking.assigned_staff.first_name }}</small>
                         </div>
-                        <div>
+                        <div class="my-2">
                             <small>Contact : {{ booking.assigned_staff.mobile }}</small>
                         </div>
                     </section>
@@ -65,7 +65,7 @@
                                             <th class="px-0" scope="row"> Requested Services</th>
                                             <th>:</th>
                                             {% for ss in booking.services.all %}
-                                            <td class="badge badge-dark badge-pill py-1 mx-1">{{ ss }}</td>
+                                            <td class="badge badge-dark badge-pill py-1 mx-1 mt-3">{{ ss }}</td>
                                             {% endfor %}
                                         </tr>
                                         <tr>
