@@ -11,16 +11,16 @@ class BookingAdmin(admin.ModelAdmin):
          'fields': ('services', 'quantity')}),
         (_('Other Details'), {
             'fields': ('delivery_type', 'status', 'amount')}),
-        (_('Important dates'), {'fields': ('delivered_on', )}),
+        # (_('Important dates'), {'fields': ('delivered_on', )}),
     )
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('cust_id', 'assigned_staff', 'services', 'quantity', 'delivery_type', 'status', 'amount', 'booked_on', 'delivered_on'),
+            'fields': ('cust_id', 'assigned_staff', 'services', 'quantity', 'delivery_type', 'status', 'amount', 'booked_on'),
         }),
     )
     list_display = ['assigned_staff', 'delivery_type',
-                    'status', 'booked_on', 'delivered_on']
+                    'status', 'booked_on']
     search_fields = ['service', 'assigned_staff', 'status']
     ordering = ('status',)
 

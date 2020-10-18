@@ -11,15 +11,14 @@ class Booking(models.Model):
     assigned_staff = models.ForeignKey(User, on_delete=models.CASCADE)
     services = models.ManyToManyField(Service)
     quantity = models.PositiveIntegerField()
+    amount = models.FloatField(null=True, blank=True)
     delivery_choice = (('local', 'Pickup'), ('myself', 'Myself'))
     delivery_type = models.CharField(choices=delivery_choice, max_length=30)
     status_choice = (('pending', 'Pending'), ('pickedup', 'Picked Up'), ('canceled', 'Canceled'),
                      ('ready', 'Ready'), ('delivered', 'Delivered'))
     status = models.CharField(max_length=20, choices=status_choice,
                               default=status_choice[0][0])
-    amount = models.FloatField(null=True, blank=True)
     booked_on = models.DateTimeField(auto_now_add=True)
-    delivered_on = models.DateTimeField(null=True, blank=True)
     # address = models.CharField(User.address, max_length=100)
     # street = models.CharField(User.street, max_length=50)
     # city = models.CharField(User.city, max_length=50)
