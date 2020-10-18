@@ -10,6 +10,7 @@ class Booking(models.Model):
     # assigned to which staff
     assigned_staff = models.ForeignKey(User, on_delete=models.CASCADE)
     services = models.ForeignKey(Service, on_delete=models.SET_NULL, null=True)
+    # sub-service
     quantity = models.PositiveIntegerField()
     amount = models.FloatField(null=True, blank=True)
     delivery_choice = (('pickup', 'Pickup (Self)'), ('door-step', 'Door Step'))

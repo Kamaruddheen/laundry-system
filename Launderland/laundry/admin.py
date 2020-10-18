@@ -22,7 +22,7 @@ class BookingAdmin(admin.ModelAdmin):
     list_display = ['assigned_staff', 'delivery_type',
                     'status', 'booked_on']
     search_fields = ['service', 'assigned_staff', 'status']
-    ordering = ('status',)
+    ordering = ('-status',)
 
 
 admin.site.register(Booking, BookingAdmin)
