@@ -16,13 +16,13 @@ class BookingForm(forms.ModelForm):
     class Meta:
         model = Booking
         fields = ['services', 'service_on',
-                  'unit', 'delivery_type']
+                  'quantity', 'delivery_type']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['services'].label = "Select your service(s)"
         self.fields['service_on'].label = "When do you need laundry to be done?"
-        self.fields['unit'].label = "How many dress(es) or bag(s) it will be?"
+        self.fields['quantity'].label = "How many dress(es) or bag(s) it will be?"
         self.fields['delivery_type'].label = "Delivery Type"
 
     def clean_service_on(self):

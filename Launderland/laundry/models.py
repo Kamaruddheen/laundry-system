@@ -10,7 +10,7 @@ class Booking(models.Model):
     # assigned to which staff
     assigned_staff = models.ForeignKey(User, on_delete=models.CASCADE)
     services = models.ManyToManyField(Service)
-    unit = models.PositiveIntegerField()
+    quantity = models.PositiveIntegerField()
     delivery_choice = (('local', 'Pickup'), ('myself', 'Myself'))
     delivery_type = models.CharField(choices=delivery_choice, max_length=30)
     status_choice = (('pending', 'Pending'), ('pickedup', 'Picked Up'), ('canceled', 'Canceled'),
