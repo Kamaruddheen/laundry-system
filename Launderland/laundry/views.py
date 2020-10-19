@@ -16,9 +16,7 @@ def sub_service(request):
         service = request.GET.get('service')
         subservice = Subservice.objects.filter(
             service=service).order_by('sub_service')
-        context = {
-            'sub_service': subservice
-        }
+        context = {'sub_service': subservice}
         return render(request, 'laundry/sub_service.html', context)
 
 
@@ -28,8 +26,12 @@ def Bookings(request):
     staff_free = User.objects.filter(user_type=2, staff_status=False)
     if form.is_valid():
         if staff_free:
+            quantity = request.POST.get('quantity')
+            price_id = request.POST.get('sub_service')
+            price = Subservice.objects.get(id=price_id)
             staff_name = str(staff_free[0].first_name)
             booking_obj = form.save(commit=False)
+            booking_obj.amount = price.price * float(quantity)
             booking_obj.cust_id = User.objects.get(id=request.user.id or None)
             booking_obj.assigned_staff = User.objects.get(
                 mobile=staff_free[0].mobile)

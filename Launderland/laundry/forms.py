@@ -25,6 +25,5 @@ class BookingForm(forms.ModelForm):
             except (ValueError, TypeError):
                 pass
         elif self.instance.pk:
-            print('else block')
             self.fields['sub_service'].queryset = self.instance.field.sub_service_set.order_by(
                 'service')
