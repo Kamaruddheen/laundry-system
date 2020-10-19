@@ -1,0 +1,68 @@
+{% extends 'base_layout.html' %}
+{% load static %}
+
+{% block title %}
+<title>Launder land | Staff Booking</title>
+{% endblock %}
+
+{% block content %}
+
+<body id="booking">
+    <!-- ? My Bookings Title -->
+    <article class="bg_light_orange_2 container-fluid py-2">
+        <section class="pr-md-auto pl-md-5 text-center text-md-left">
+            <h3 class="brown mb-0 clamp_size_header">List of Bookings</h3>
+        </section>
+    </article>
+    <!-- ? List of Booking -->
+    <article class="container my-2">
+        <section class="card shadow-sm my-3 w-100">
+            <div class="card-body p-0">
+                <div class="table-responsive table-wrapper">
+                    <table class="table table-hover mb-0 brown">
+                        <!-- * Table Header -->
+                        <thead class="bg_light_orange_2">
+                            <tr>
+                                <th scope="col">No.</th>
+                                <th scope="col">Customer</th>
+                                <th scope="col">Delivery Type</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                        </thead>
+                        <!-- * Table Content -->
+                        <tbody>
+                            {% for data in booking %}
+                            <tr>
+                                {% if forloop %}
+                                <th><a class="nav-link p-0 brown btn-cust"
+                                        href="{% url 'laundry:staff_booking_edit' data.id %}">{{forloop.counter}}</a>
+                                </th>
+                                {% endif %}
+                                <td>{{ data.cust_id }}</td>
+                                <td>{{ data.delivery_type }}</td>
+                                <td>&#x20B9; {{ data.amount }}</td>
+                                <td><span class="badge rounded-pill mb-0
+                                {% if data.status == 'delivered' %}
+                                badge-success
+                                {% elif data.status == 'ready' %}
+                                badge-info
+                                {% elif data.status == 'pickedup' %}
+                                badge-primary
+                                {% elif data.status == 'pending' %}
+                                badge-warning
+                                {% elif data.status == 'canceled' %}
+                                badge-danger
+                                {% endif %}
+                                ">{{ data.status }}</span></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </article>
+</body>
+
+{% endblock %}

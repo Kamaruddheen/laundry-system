@@ -27,3 +27,13 @@ class BookingForm(forms.ModelForm):
         elif self.instance.pk:
             self.fields['sub_service'].queryset = self.instance.field.sub_service_set.order_by(
                 'service')
+
+
+class UpdateBookingForm(forms.ModelForm):
+    class Meta:
+        model = Booking
+        fields = ['status']
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(UpdateBookingForm, self).__init__(*args, **kwargs)

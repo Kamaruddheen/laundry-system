@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
-from usermodule.decorators import user_is_customer
+from usermodule.decorators import *
 from usermodule.forms import User
 
 from .forms import *
@@ -59,3 +59,32 @@ def Mybookings(request):
 def Booking_details(request, id):
     booking = get_object_or_404(Booking, id=id)
     return render(request, 'laundry/booking_details.html', {'booking': booking})
+
+
+@user_is_staff
+def staff_booking(request):
+    bookings = Booking.objects.filter(
+        assigned_staff=request.user.id).order_by('booked_on').reverse()
+    return render(request, 'laundry/staff_booking.html', {'booking': bookings})
+
+
+@user_is_staff
+def staff_booking_edit(request, id):
+    booking = get_object_or_404(Booking, id=id)
+    staff_id = booking.assigned_staff.id
+    myform = UpdateBookingForm(
+        request.POST or None, instance=booking, request=request)
+    if myform.is_valid():
+        form_obj = myform.save(commit=False)
+        if form_obj.status == "delivered" or form_obj.status == "canceled":
+            form_obj.save()
+            User.objects.filter(id=staff_id).update(
+                staff_status=False)
+            messages.success(
+                request, "You have successfully changed Status to \"" + form_obj.status + "\"")
+        else:
+            User.objects.filter(id=staff_id).update(
+                staff_status=True)
+
+    context = {'form': myform, 'booking': booking, }
+    return render(request, 'laundry/staff_edit_booking.html', context=context)
