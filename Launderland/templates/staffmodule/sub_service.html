@@ -3,39 +3,39 @@
 {% load static %}
 
 {% block title %}
-<title>Launder land | Services</title>
+<title>Launder land | Sub Services</title>
 {% endblock %}
 
 {% block content %}
 
 <body id="staff">
-    <!-- ? Service Title -->
+    <!-- ? Sub Service Title -->
     <article class="bg_light_orange_2 container-fluid py-2">
         <section class="pr-md-auto pl-md-5 text-center text-md-left">
-            <h3 class="brown mb-0 clamp_size_header">Services</h3>
+            <h3 class="brown mb-0 clamp_size_header">Sub service</h3>
         </section>
     </article>
-    <!-- ? List of Services -->
+    <!-- ? List of Sub services -->
     <article class="container my-2">
         {% if user.user_type == 1 %}
         <!-- Modal -->
-        <article class="modal fade" id="add_service_modal" data-backdrop="static" data-keyboard="false" tabindex="-1"
-            role="dialog" aria-labelledby="staticBackdropLabel" aria-modal="true">
+        <article class="modal fade" id="add_sub_service_modal" data-backdrop="static" data-keyboard="false"
+            tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-modal="true">
             <div class="modal-dialog d-flex justfy-content-center align-items-center" style="height: 90vh;">
                 <div class="modal-content">
                     <section class="modal-header bg_light_orange_2 brown">
-                        <h5 class="modal-title" id="exampleModalLabel">Add a Service</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Add a Subservice</h5>
                         <button type="button" class="btn btn-cust close" data-dismiss="modal" aria-label="Close">×
                         </button>
                     </section>
-                    <!-- Add Service Form -->
+                    <!-- Add Subservice Form -->
                     <section class="modal-body bg_light_orange_1">
                         <form id="add_form" method="POST" role="form" class="brown">
                             {% csrf_token %}
                             {{ form|crispy }}
                         </form>
                     </section>
-                    <!-- Add Service Button -->
+                    <!-- Add Subservice Button -->
                     <section class="modal-footer brown bg_light_orange_2">
                         <button type="cancel" class="btn btn-cust btn-warning bold" data-dismiss="modal">Cancel</button>
                         <input type="submit" name="submit" value="Add" form="add_form"
@@ -45,8 +45,8 @@
             </div>
         </article>
         <!-- Add modal toggle button -->
-        <button type="button" class="btn-cust bg_light_orange_1 brown btn float-right my-2" id="add_service"
-            data-toggle="modal" data-target="#add_service_modal">Add <i class="fas fa-plus brown"></i>
+        <button type="button" class="btn-cust bg_light_orange_1 brown btn float-right my-2" id="add_sub_service"
+            data-toggle="modal" data-target="#add_sub_service_modal">Add <i class="fas fa-plus brown"></i>
         </button>
         {% endif %}
         <section class="card shadow-sm my-3 w-100">
@@ -57,8 +57,8 @@
                         <thead class="bg_light_orange_2">
                             <tr>
                                 <th scope="col">No.</th>
-                                <th scope="col">Services</th>
-                                <th scope="col">Sub Services</th>
+                                <th scope="col">Subservices</th>
+                                <th scope="col">Price</th>
                                 {% if user.user_type == 1 %}
                                 <th scope="col"></th>
                                 {% endif %}
@@ -66,25 +66,23 @@
                         </thead>
                         <!-- * Table Content -->
                         <tbody>
-                            {% for data in services %}
+                            {% for data in sub_service %}
                             <tr>
                                 {% if forloop %}
                                 <th>{{forloop.counter}}</th>
                                 {% endif %}
                                 {% if user.user_type == 1 %}
-                                <td>
-                                    <form id="edit_form{{ data.id }}" method="POST"
-                                        action="{% url 'staffmodule:service_edit' data.id %}">
-                                        {% csrf_token %}
-                                        <input type="text" name="service" class="form-control"
-                                            value="{{ data.service }}">
-                                    </form>
-                                </td>
-                                <td>
-                                    <a class="nav-link p-0" href="{% url 'staffmodule:subservices' data.id %}">
-                                        Subservice of {{ data.service }}
-                                    </a>
-                                </td>
+                                <form id="edit_form{{ data.id }}" method="POST"
+                                    action="{% url 'staffmodule:sub_service_edit' data.id %}">
+                                    {% csrf_token %}
+                                    <td>
+                                        <input type="text" name="sub_service" class="form-control"
+                                            value="{{ data.sub_service }}">
+                                    </td>
+                                    <td>
+                                        <input type="text" name="price" class="form-control" value="{{ data.price }}">
+                                    </td>
+                                </form>
                                 <td class="text-right">
                                     <input type="submit" form="edit_form{{ data.id }}" value="Edit"
                                         class="btn btn-cust blue bold">
@@ -92,18 +90,14 @@
                                         data-toggle="modal" data-target="#del{{ data.id }}">
                                 </td>
                                 {% elif user.user_type == 2 %}
-                                <td>{{ data.service }}</td>
-                                <td>
-                                    <a class="nav-link p-0" href="{% url 'staffmodule:subservices' data.id %}">
-                                        Subservice of {{ data.service }}
-                                    </a>
-                                </td>
+                                <td>{{ data.sub_service }}</td>
+                                <td>{{ data.price }}</td>
                                 {% endif %}
                             </tr>
                             {% if user.user_type == 1 %}
                             <div class="modal fade" id="del{{ data.id }}" data-backdrop="static" data-keyboard="false"
                                 tabindex="-1">
-                                <!-- Delete A Service  -->
+                                <!-- Delete A Sub service  -->
                                 <div class="modal-dialog d-flex justfy-content-center align-items-center"
                                     style="height: 90vh;">
                                     <div class="modal-content brown">
@@ -114,10 +108,10 @@
                                         </section>
                                         <section class="modal-body">
                                             <h4 class="modal-title">Are you sure you want to delete?</h4>
-                                            <h5 class="bold my-2">{{ data.service }}</h5>
+                                            <h5 class="bold my-2">{{ data.sub_service }}</h5>
                                         </section>
                                         <section class="modal-footer bg_light_orange_1">
-                                            <a href="{% url 'staffmodule:service_delete' data.id %}"
+                                            <a href="{% url 'staffmodule:sub_service_delete' data.id %}"
                                                 class="btn btn-cust red">Yes,&nbsp;Delete</a>
                                             <button type="button" class="btn btn-cust btn-warning"
                                                 data-dismiss="modal">Cancel</button>
@@ -136,8 +130,8 @@
 
     <script>
         $(document).ready(function () {
-            $("#add_service").click(function () {
-                $("#add_service_modal").modal("show");
+            $("#add_sub_service").click(function () {
+                $("#add_sub_service_modal").modal("show");
             })
         });
     </script>

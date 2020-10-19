@@ -8,8 +8,9 @@ from usermodule.decorators import user_is_staff, user_is_owner
 from django.utils.timezone import now, timedelta
 
 
+# ? dashboard
 @user_is_staff
-def staff_homepage(request):
+def staff_dashboard(request):
     return render(request, 'staffmodule/index.html')
 
 
@@ -51,6 +52,55 @@ def service_delete(request, id):
     service.delete()
     messages.success(request, 'Deleted successfully!!!')
     return redirect('staffmodule:service')
+
+
+@user_is_staff
+def sub_service_view(request, id):
+    sub_service = Subservice.objects.filter(service=id)
+    form = SubServiceForm(request.POST or None)
+    if form.is_valid():
+        if request.user.user_type == 1:
+            form_obj = form.save(commit=False)
+            form_obj.service = Service.objects.get(id=id)
+            form_obj.save()
+        else:
+            messages.warning(
+                request, 'Staff cannot add a new Service. Only Owner can add new service')
+    context = {'form': form, 'sub_service': sub_service}
+    return render(request, 'staffmodule/sub_service.html', context=context)
+
+
+@user_is_owner
+def sub_service_edit(request, id):
+    if request.method == "POST":
+        sub_service = request.POST.get('sub_service')
+        price = request.POST.get('price')
+        if Subservice.objects.filter(id=id).exists():
+            demo = Subservice.objects.filter(
+                sub_service=sub_service, id=id) or None
+            prices = Subservice.objects.filter(price=price, id=id) or None
+            if demo is None or prices is None:
+                Subservice.objects.filter(id=id).update(
+                    sub_service=sub_service)
+                Subservice.objects.filter(id=id).update(price=price)
+                messages.info(request, 'Subservice edited successfully!!!')
+            else:
+                messages.info(request, 'No changes detected..')
+        else:
+            messages.info(request, 'Couldn\'t able to find the Subservice')
+
+        service = Subservice.objects.get(id=id)
+        return redirect('staffmodule:subservices', id=service.service_id)
+    else:
+        return redirect('homepage')
+
+
+@user_is_owner
+def sub_service_delete(request, id):
+    subservice = Subservice.objects.get(id=id)
+    subservice.delete()
+    messages.success(request, 'Deleted successfully!!!')
+    return redirect('staffmodule:subservices', id=subservice.service_id)
 
 
 @user_is_staff
