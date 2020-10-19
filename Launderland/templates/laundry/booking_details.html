@@ -24,7 +24,7 @@
                         <h3 class="mb-2">Staff Details</h3>
                         <div class="mx-auto d-flex justify-content-center mb-4">
                             <img src="{{ booking.assigned_staff.profile_pic.url }}" class="mt-3 rounded-circle"
-                                width="130" alt="{{ booking.assigned_staff.first_name }}" />
+                                width="100" alt="{{ booking.assigned_staff.first_name }}" />
                         </div>
                         <div class="my-2">
                             <small>Name : {{ booking.assigned_staff.first_name }}</small>
@@ -37,27 +37,22 @@
                     <section class="col-12 col-md-8 col-lg-9">
                         <div class="card border-0">
                             <div class="card-body brown rounded">
-                                <h5 class="card-title float-right badge rounded-pill
-                                    {% if booking.status == 'delivered' %}
-                                    badge-success
-                                    {% elif booking.status == 'ready' %}
-                                    badge-info
-                                    {% elif booking.status == 'pickedup' %}
-                                    badge-primary
-                                    {% elif booking.status == 'pending' %}
-                                    badge-warning
-                                    {% elif booking.status == 'canceled' %}
-                                    badge-danger
-                                    {% endif %}">
-                                    {{ booking.status }}
-                                </h5>
                                 <table class="table brown borderless">
                                     <thead>
-                                        <tr>
-                                            <th class="px-0" scope="row">Scheduled On:</th>
-                                            <th>:</th>
-                                            <td>service_on</td>
-                                        </tr>
+                                        <h5 class="card-title float-right badge rounded-pill
+                                            {% if booking.status == 'delivered' %}
+                                            badge-success
+                                            {% elif booking.status == 'ready' %}
+                                            badge-info
+                                            {% elif booking.status == 'pickedup' %}
+                                            badge-primary
+                                            {% elif booking.status == 'pending' %}
+                                            badge-warning
+                                            {% elif booking.status == 'canceled' %}
+                                            badge-danger
+                                            {% endif %}">
+                                            {{ booking.status }}
+                                        </h5>
                                     </thead>
                                     <tbody>
                                         <tr>

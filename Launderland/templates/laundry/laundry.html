@@ -2,11 +2,72 @@
 {% load static %}
 
 {% block title %}
-<title>Launder land | Laundry</title>
+<title>Launder land | Dashboard</title>
 {% endblock %}
 
 {% block content %}
 
-In Laundry
+<body id="bookings">
+    <!-- ? Title -->
+    <article class="bg_light_orange_2 container-fluid py-2">
+        <section class="pr-md-auto pl-md-5 text-center text-md-left">
+            <h3 class="brown mb-0 clamp_size_header">Dashboard</h3>
+        </section>
+    </article>
+    <article class="container-fluid my-2">
+        <div class="row d-flex justify-content-center">
+            <a href="{% url 'laundry:mybooking'%}" class="card card-cust bg-transparent border-0 m-1"
+                style="width: 18rem;">
+                <div class="card-body bg_light_orange_1 text-center brown rounded">
+                    <div class="mx-auto img_body d-flex">
+                        <img src="{% static 'images/booking.png' %}" class="rounded" width="250"
+                            alt="{{ staff.first_name }} image" style="z-index:500">
+                    </div>
+                    <h5 class="card-title pt-2">My Bookings</h5>
+                </div>
+            </a>
+            <section class="card card-cust bg-transparent border-0 m-1" style="width: 18rem;">
+                <div class="card-body bg_light_orange_1 text-center brown rounded">
+                    <div class="mx-auto img_body d-flex">
+                        <img src="{% static 'images/booking.png' %}" class="rounded" width="250"
+                            alt="{{ staff.first_name }} image" style="z-index:500">
+                    </div>
+                    <h5 class="card-title pt-2">Delivery</h5>
+                </div>
+            </section>
+            <section class="card card-cust bg-transparent border-0 m-1" style="width: 18rem;">
+                <div class="card-body bg_light_orange_1 text-center brown rounded">
+                    <div class="mx-auto img_body d-flex">
+                        <img src="{% static 'images/booking.png' %}" class="rounded" width="250"
+                            alt="{{ staff.first_name }} image" style="z-index:500">
+                    </div>
+                    <h5 class="card-title pt-2">Payment History</h5>
+                </div>
+            </section>
+            {% if user.user_type == 1 %}
+            <a href="{% url 'customermodule:customer_list'%}" class="card card-cust bg-transparent border-0 m-1"
+                style="width: 18rem;">
+                <div class="card-body bg_light_orange_1 text-center brown rounded">
+                    <div class="mx-auto img_body d-flex">
+                        <img src="{% static 'images/booking.png' %}" class="rounded" width="250"
+                            alt="{{ staff.first_name }} image" style="z-index:500">
+                    </div>
+                    <h5 class="card-title pt-2">Customers</h5>
+                </div>
+            </a>
+            <a href="{% url 'staffmodule:staff_list'%}" class="card card-cust bg-transparent border-0 m-1"
+                style="width: 18rem;">
+                <div class="card-body bg_light_orange_1 text-center brown rounded">
+                    <div class="mx-auto img_body d-flex">
+                        <img src="{% static 'images/booking.png' %}" class="rounded" width="250"
+                            alt="{{ staff.first_name }} image" style="z-index:500">
+                    </div>
+                    <h5 class="card-title pt-2">Staffs</h5>
+                </div>
+            </a>
+            {% endif %}
+        </div>
+    </article>
+</body>
 
 {% endblock %}
