@@ -1,16 +1,15 @@
 from django.db import models
 from usermodule.models import User
-from staffmodule.models import Service
+from staffmodule.models import *
 
 
 class Booking(models.Model):
-    # which customer
     cust_id = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="cid")
-    # assigned to which staff
     assigned_staff = models.ForeignKey(User, on_delete=models.CASCADE)
     services = models.ForeignKey(Service, on_delete=models.SET_NULL, null=True)
-    # sub-service
+    sub_service = models.ForeignKey(
+        Subservice, on_delete=models.SET_NULL, null=True)
     quantity = models.PositiveIntegerField()
     amount = models.FloatField(null=True, blank=True)
     delivery_choice = (('pickup', 'Pickup (Self)'), ('door-step', 'Door Step'))

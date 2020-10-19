@@ -29,11 +29,14 @@
                 <form method="POST" class="needs-validation" novalidate>
                     {% csrf_token %}
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-12">
                             {{ form.quantity|as_crispy_field }}
                         </div>
-                        <div class="form-group col-md-12">
+                        <div class="form-group col-md-6">
                             {{ form.services|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ form.sub_service|as_crispy_field }}
                         </div>
                         <div class="form-group col-md-6">
                             {{ form.delivery_type|as_crispy_field }}
@@ -47,6 +50,42 @@
             </div>
         </div>
     </article>
+
+    <script>
+        $(document).ready(function () {
+
+            var services = $('#id_services').val();
+            if (services != "") {
+                $.ajax({
+                    url: "{% url 'laundry:sub_service' %}",
+                    type: "GET",
+                    data: {
+                        'service': services
+                    },
+                    success: function (data) {
+                        $('#id_sub_service').html(data);
+                    }
+                });
+            }
+
+            $('#id_services').change(function () {
+                var services = $(this).val();
+                if (services != "") {
+                    $.ajax({
+                        url: "{% url 'laundry:sub_service' %}",
+                        type: "GET",
+                        data: {
+                            'service': services
+                        },
+                        success: function (data) {
+                            $('#id_sub_service').html(data);
+                        }
+                    });
+                }
+            })
+
+        });
+    </script>
 </body>
 
 

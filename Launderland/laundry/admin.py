@@ -8,7 +8,7 @@ class BookingAdmin(admin.ModelAdmin):
     fieldsets = (
         (_('User & Staff Details'), {'fields': ('cust_id', 'assigned_staff')}),
         (_('Laundry Details'), {
-         'fields': ('services', 'quantity')}),
+         'fields': ('services', 'sub_service', 'quantity')}),
         (_('Other Details'), {
             'fields': ('delivery_type', 'status', 'amount')}),
         # (_('Important dates'), {'fields': ('delivered_on', )}),
@@ -16,7 +16,7 @@ class BookingAdmin(admin.ModelAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('cust_id', 'assigned_staff', 'services', 'quantity', 'delivery_type', 'status', 'amount', 'booked_on'),
+            'fields': ('cust_id', 'assigned_staff', 'services', 'sub_service', 'quantity', 'delivery_type', 'status', 'amount', 'booked_on'),
         }),
     )
     list_display = ['assigned_staff', 'delivery_type',

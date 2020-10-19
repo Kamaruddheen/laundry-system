@@ -61,11 +61,9 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <th class="px-0" scope="row"> Requested Services</th>
+                                            <th class="px-0" scope="row"> Requested Service</th>
                                             <th>:</th>
-                                            {% for ss in booking.services.all %}
-                                            <td class="badge badge-dark badge-pill py-1 mx-1 mt-3">{{ ss }}</td>
-                                            {% endfor %}
+                                            <td class="px-0">{{ booking.services }} [{{ booking.sub_service }}]</td>
                                         </tr>
                                         <tr>
                                             <th class="px-0" scope="row">Quantity</th>
