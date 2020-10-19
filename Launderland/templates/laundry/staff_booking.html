@@ -8,7 +8,7 @@
 {% block content %}
 
 <body id="booking">
-    <!-- ? My Bookings Title -->
+    <!-- ? Title -->
     <article class="bg_light_orange_2 container-fluid py-2">
         <section class="pr-md-auto pl-md-5 text-center text-md-left">
             <h3 class="brown mb-0 clamp_size_header">List of Bookings</h3>
@@ -25,6 +25,9 @@
                             <tr>
                                 <th scope="col">No.</th>
                                 <th scope="col">Customer</th>
+                                {% if user.user_type == 1 %}
+                                <th scope="col">Staff</th>
+                                {% endif %}
                                 <th scope="col">Delivery Type</th>
                                 <th scope="col">Amount</th>
                                 <th scope="col">Status</th>
@@ -40,8 +43,11 @@
                                 </th>
                                 {% endif %}
                                 <td>{{ data.cust_id }}</td>
+                                {% if user.user_type == 1 %}
+                                <td>{{ data.assigned_staff }}</td>
+                                {% endif %}
                                 <td>{{ data.delivery_type }}</td>
-                                <td>&#x20B9; {{ data.amount }}</td>
+                                <td>&#x20B9; {{ data.amount|default:"-----" }}</td>
                                 <td><span class="badge rounded-pill mb-0
                                 {% if data.status == 'delivered' %}
                                 badge-success

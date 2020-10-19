@@ -24,8 +24,8 @@
                     <section class="col-12 col-md-4 col-lg-3 px-0 brown text-center">
                         <h3 class="mb-2">Customer Detail</h3>
                         <div class="mx-auto d-flex justify-content-center mb-4">
-                            <img src="{{ booking.cust_id.profile_pic.url }}" class="rounded-circle" width="130"
-                                alt="{{ booking.assigned_staff.first_name }}" />
+                            <img src="{{ booking.cust_id.profile_pic.url }}" class="mt-3 rounded-circle" width="100"
+                                alt="{{ booking.cust_id.first_name }}" />
                         </div>
                         <div class="my-2">
                             <small>Name : {{ booking.cust_id.first_name }}</small>
@@ -33,6 +33,21 @@
                         <div class="my-2">
                             <small>Contact : {{ booking.cust_id.mobile }}</small>
                         </div>
+                        {% if user.user_type == 1 %}
+                        <div class="border-top my-2" style="border-color: #540c0b!important;">
+                            <h3 class="my-2">Staff Detail</h3>
+                            <div class="mx-auto d-flex justify-content-center mb-4">
+                                <img src="{{ booking.assigned_staff.profile_pic.url }}" class="mt-3 rounded-circle"
+                                    width="100" alt="{{ booking.assigned_staff.first_name }}" />
+                            </div>
+                            <div class="my-2">
+                                <small>Name : {{ booking.assigned_staff.first_name }}</small>
+                            </div>
+                            <div class="my-2">
+                                <small>Contact : {{ booking.assigned_staff.mobile }}</small>
+                            </div>
+                        </div>
+                        {% endif %}
                     </section>
                     <!-- ? Booking Details -->
                     <section class="col-12 col-md-8 col-lg-9">

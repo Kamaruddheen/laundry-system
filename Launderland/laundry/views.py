@@ -62,9 +62,13 @@ def Booking_details(request, id):
 
 
 @user_is_staff
-def staff_booking(request):
-    bookings = Booking.objects.filter(
-        assigned_staff=request.user.id).order_by('booked_on').reverse()
+def staff_all_booking(request):
+    bookings = None
+    if request.user.user_type == 1:
+        bookings = Booking.objects.all().order_by('booked_on').reverse()
+    elif request.user.user_type == 2:
+        bookings = Booking.objects.filter(
+            assigned_staff=request.user.id).order_by('booked_on').reverse()
     return render(request, 'laundry/staff_booking.html', {'booking': bookings})
 
 
