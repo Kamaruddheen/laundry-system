@@ -30,7 +30,6 @@ def account_signin(request):
         password = form.cleaned_data.get('password')
         user = authenticate(request, mobile=mobile, password=password)
         next_link = request.GET.get('next', None)
-        print(next_link)
         if user is not None:
             login(request, user)
             if user.user_type in (1, 2):

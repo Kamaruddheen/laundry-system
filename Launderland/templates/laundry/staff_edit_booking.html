@@ -20,30 +20,44 @@
         <div class="bg-light box-shadow-lg rounded-lg px-4 py-3 my-5 bg_light_orange_1">
             <div class="px-lg-3">
                 <div class="row">
-                    <!-- ? Staff Detail -->
+                    <!-- ? Customer Detail -->
                     <section class="col-12 col-md-4 col-lg-3 px-0 brown text-center">
                         <h3 class="mb-2">Customer Detail</h3>
-                        <div class="mx-auto d-flex justify-content-center mb-4">
-                            <img src="{{ booking.cust_id.profile_pic.url }}" class="mt-3 rounded-circle" width="100"
+                        <div class="mx-auto d-flex justify-content-center mb-2">
+                            <img src="{{ booking.cust_id.profile_pic.url }}" class="rounded-circle" width="100"
                                 alt="{{ booking.cust_id.first_name }}" />
                         </div>
-                        <div class="my-2">
-                            <small>Name : {{ booking.cust_id.first_name }}</small>
+                        <div>
+                            <small>Name : {{ booking.cust_id.first_name }} {{ booking.cust_id.last_name }}</small>
                         </div>
-                        <div class="my-2">
+                        <div>
                             <small>Contact : {{ booking.cust_id.mobile }}</small>
                         </div>
+                        <div>
+                            <small>Address : {{ booking.cust_id.address }}</small>
+                        </div>
+                        <div>
+                            <small>Street : {{ booking.cust_id.street }}</small>
+                        </div>
+                        <div>
+                            <small>City : {{ booking.cust_id.city }}</small>
+                        </div>
+                        <div class="mb-2">
+                            <small>Pincode : {{ booking.cust_id.pincode }}</small>
+                        </div>
                         {% if user.user_type == 1 %}
+                        <!-- ? Staff Detail -->
                         <div class="border-top my-2" style="border-color: #540c0b!important;">
                             <h3 class="my-2">Staff Detail</h3>
-                            <div class="mx-auto d-flex justify-content-center mb-4">
-                                <img src="{{ booking.assigned_staff.profile_pic.url }}" class="mt-3 rounded-circle"
+                            <div class="mx-auto d-flex justify-content-center mb-2">
+                                <img src="{{ booking.assigned_staff.profile_pic.url }}" class="rounded-circle"
                                     width="100" alt="{{ booking.assigned_staff.first_name }}" />
                             </div>
-                            <div class="my-2">
-                                <small>Name : {{ booking.assigned_staff.first_name }}</small>
+                            <div>
+                                <small>Name : {{ booking.assigned_staff.first_name }}
+                                    {{ booking.assigned_staff.last_name }}</small>
                             </div>
-                            <div class="my-2">
+                            <div>
                                 <small>Contact : {{ booking.assigned_staff.mobile }}</small>
                             </div>
                         </div>
