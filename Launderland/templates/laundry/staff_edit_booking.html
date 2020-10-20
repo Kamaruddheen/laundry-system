@@ -75,6 +75,8 @@
                                                     badge-success
                                                     {% elif booking.status == 'ready' %}
                                                     badge-info
+                                                    {% elif booking.status == 'cleaning' %}
+                                                    badge-secondary
                                                     {% elif booking.status == 'pickedup' %}
                                                     badge-primary
                                                     {% elif booking.status == 'pending' %}

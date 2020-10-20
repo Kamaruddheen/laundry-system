@@ -84,11 +84,11 @@ def staff_booking_edit(request, id):
             form_obj.save()
             User.objects.filter(id=staff_id).update(
                 staff_status=False)
-            messages.success(
-                request, "You have successfully changed Status to \"" + form_obj.status + "\"")
         else:
+            form_obj.save()
             User.objects.filter(id=staff_id).update(
                 staff_status=True)
-
+        messages.success(
+            request, "You have successfully changed Status to \"" + form_obj.status + "\"")
     context = {'form': myform, 'booking': booking, }
     return render(request, 'laundry/staff_edit_booking.html', context=context)

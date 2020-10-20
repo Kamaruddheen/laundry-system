@@ -60,7 +60,8 @@
                 {% if user.is_authenticated %}
                 <!-- * My Account -->
                 <div class="nav-item dropdown d-flex order-md-2">
-                    <a class="navbar-tool mx-sm-1 mx-md-0 text-decoration-none btn-cust" href="">
+                    <a class="navbar-tool mx-sm-1 mx-md-0 text-decoration-none btn-cust"
+                        href="{% url 'usermodule:myaccount' %}">
                         <div class="navbar-tool-icon-box">
                             <img class="rounded-circle" src="{{ user.profile_pic.url }}" width="35"
                                 style="border: 2px solid white" alt="Profile" />

@@ -29,8 +29,11 @@
                 <form method="POST" class="needs-validation" novalidate>
                     {% csrf_token %}
                     <div class="form-row">
-                        <div class="form-group col-md-12">
+                        <div class="form-group col-md-6">
                             {{ form.quantity|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ form.delivery_type|as_crispy_field }}
                         </div>
                         <div class="form-group col-md-6">
                             {{ form.services|as_crispy_field }}
@@ -38,12 +41,8 @@
                         <div class="form-group col-md-6">
                             {{ form.sub_service|as_crispy_field }}
                         </div>
-                        <div class="form-group col-md-6">
-                            {{ form.delivery_type|as_crispy_field }}
-                            <small>Do you wanna drop and pick it yourself or shall we?</small>
-                        </div>
                     </div>
-                    <button type="submit" class="btn bg_orange_1 btn-cust btn-block mb-3">
+                    <button type="submit" class="btn bg_orange_1 btn-cust btn-block rounded-pill">
                         Book Now
                     </button>
                 </form>

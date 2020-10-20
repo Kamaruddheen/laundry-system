@@ -8,12 +8,13 @@ from usermodule.decorators import user_is_staff, user_is_owner
 from django.utils.timezone import now, timedelta
 
 
-# ? dashboard
+# ? staff_homepage
 @user_is_staff
-def staff_dashboard(request):
+def staff_homepage(request):
     return render(request, 'staffmodule/index.html')
 
 
+# all user can view service
 def service_view(request):
     services = Service.objects.all()
     form = ServiceForm(request.POST or None)
@@ -53,6 +54,7 @@ def service_delete(request, id):
     return redirect('staffmodule:service')
 
 
+# all user can view Subservice
 def sub_service_view(request, id):
     sub_service = Subservice.objects.filter(service=id)
     form = SubServiceForm(request.POST or None)

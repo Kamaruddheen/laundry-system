@@ -14,7 +14,7 @@ class Booking(models.Model):
     amount = models.FloatField(null=True, blank=True)
     delivery_choice = (('pickup', 'Pickup (Self)'), ('door-step', 'Door Step'))
     delivery_type = models.CharField(choices=delivery_choice, max_length=30)
-    status_choice = (('pending', 'Pending'), ('pickedup', 'Picked Up'), ('canceled', 'Canceled'),
+    status_choice = (('pending', 'Pending'), ('cleaning', 'Cleaning'), ('pickedup', 'Picked Up'), ('canceled', 'Canceled'),
                      ('ready', 'Ready'), ('delivered', 'Delivered'))
     status = models.CharField(max_length=20, choices=status_choice,
                               default=status_choice[0][0])

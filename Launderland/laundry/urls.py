@@ -5,6 +5,7 @@ app_name = 'laundry'
 
 urlpatterns = [
     path('', laundry, name='laundry'),
+    # * fetching sub_service from service while booking (ajax)
     path('sub_service/', sub_service, name='sub_service'),
     path('booking/', Bookings, name='booking'),
     path('mybookings/', Mybookings, name='mybooking'),
