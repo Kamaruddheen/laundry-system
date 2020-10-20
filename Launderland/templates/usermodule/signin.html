@@ -9,17 +9,19 @@
 {% block content %}
 
 <body id="login_body">
+    <article class="bg_light_orange_2 container-fluid py-2">
+        <section class="pr-md-auto pl-md-5 text-center text-md-left">
+            <h3 class="brown mb-0 clamp_size_header">Sign In</h3>
+        </section>
+    </article>
     <!-- ? Login + Sign Up Form -->
     <article class="container my-5 px-sm-1">
         <div class="card brown d-flex justify-content-center align-items-center bg-transparent border-0">
-            <div class="card-header text-center border-bottom-0 bg-transparent">
-                <h5 class="clamp_size_header">Sign In</h5>
-            </div>
             <div class="card-body mx-md-auto col-md-7 bg_light_orange_2 rounded">
                 <form method="POST" class="needs-validation" novalidate>
                     {% csrf_token %}
                     {{ form|crispy }}
-                    <button type="submit" class="btn bg_orange_1 btn-cust float-right btn-block mb-3">
+                    <button type="submit" class="btn bg_orange_1 btn-cust btn-block mb-3">
                         Sign In
                     </button>
                 </form>

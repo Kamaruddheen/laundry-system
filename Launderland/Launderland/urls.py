@@ -3,6 +3,7 @@ from django.urls import path, include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
 from django.conf import settings
+from django.contrib.auth import views as auth_views
 
 from .views import *
 
@@ -14,6 +15,8 @@ urlpatterns = [
     path('laundry/', include('laundry.urls')),
     path('staff/', include('staffmodule.urls')),
     path('customer/', include('customermodule.urls')),
+    path('change_password_done/', auth_views.PasswordChangeDoneView.as_view(),
+         name="password_change_done"),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
