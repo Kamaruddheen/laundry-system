@@ -57,8 +57,22 @@ def Mybookings(request):
 
 @user_is_customer
 def Booking_details(request, id):
+    form = PaymentForm(request.POST or None)
     booking = get_object_or_404(Booking, id=id)
-    return render(request, 'laundry/booking_details.html', {'booking': booking})
+    payments = None
+    if Payment.objects.filter(booking_id=booking.id).exists():
+        payments = Payment.objects.get(booking_id=booking.id)
+    elif not Payment.objects.filter(booking_id=booking.id).exists():
+        if form.is_valid():
+            payment_obj = form.save(commit=False)
+            payment_obj.cust_id = User.objects.get(id=request.user.id or None)
+            payment_obj.booking_id = Booking.objects.get(id=booking.id)
+            payment_obj.paid_amount = booking.amount
+            payment_obj.status = "paid"
+            payment_obj.save()
+            payments = Payment.objects.get(booking_id=booking.id)
+    context = {'booking': booking, 'form': form, 'payment': payments}
+    return render(request, 'laundry/booking_details.html', context)
 
 
 @user_is_staff
@@ -74,7 +88,10 @@ def staff_all_booking(request):
 
 @user_is_staff
 def staff_booking_edit(request, id):
+    payments = None
     booking = get_object_or_404(Booking, id=id)
+    if Payment.objects.filter(booking_id=booking.id).exists():
+        payments = Payment.objects.get(booking_id=booking.id)
     staff_id = booking.assigned_staff.id
     myform = UpdateBookingForm(
         request.POST or None, instance=booking, request=request)
@@ -90,5 +107,5 @@ def staff_booking_edit(request, id):
                 staff_status=True)
         messages.success(
             request, "You have successfully changed Status to \"" + form_obj.status + "\"")
-    context = {'form': myform, 'booking': booking, }
+    context = {'form': myform, 'booking': booking, 'payments': payments}
     return render(request, 'laundry/staff_edit_booking.html', context=context)

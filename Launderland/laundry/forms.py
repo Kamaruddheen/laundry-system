@@ -37,3 +37,14 @@ class UpdateBookingForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         super(UpdateBookingForm, self).__init__(*args, **kwargs)
+
+
+class PaymentForm(forms.ModelForm):
+    class Meta:
+        model = Payment
+        fields = ['payment_mode']
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super().__init__(*args, **kwargs)
+        self.fields['payment_mode'].label = "Mode of Payment :"

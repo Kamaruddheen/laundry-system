@@ -30,10 +30,10 @@
                             <small>Name : {{ booking.assigned_staff.first_name }}
                                 {{ booking.assigned_staff.last_name }}</small>
                         </div>
-                        {% if booking.status != 'delivered' and booking.status != 'canceled' and booking.status != 'cleaning' %}
                         <div class="mt-2">
                             <small>Contact : {{ booking.assigned_staff.mobile }}</small>
                         </div>
+                        {% if booking.status != 'delivered' and booking.status != 'canceled' and booking.status != 'cleaning' %}
                         <div class="mb-2">
                             <small class="asteriskField">(In&nbsp;order&nbsp;to&nbsp;cancel&nbsp;booking
                                 contact&nbsp;staff)</small>
@@ -95,6 +95,55 @@
                                                 {{ booking.booked_on }}
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <th class="px-0" scope="row">Payment Status</th>
+                                            <th>:</th>
+                                            <td class="px-0">
+                                                {% if payment.status == "paid" %}
+                                                {{ payment.status }}
+                                                {% else %}
+                                                Not Paid
+                                                <input type="button" name="submit" value="Pay Now"
+                                                    class="btn btn-cust btn-sm bg_orange_1 bold float-right rounded-pill brown"
+                                                    data-toggle="modal" data-target="#pay{{ booking.id }}">
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        {% if user.user_type == 3 and payment.status != "paid" %}
+                                        <div class="modal fade" id="pay{{ booking.id }}" tabindex="-1"
+                                            data-keyboard="false" data-backdrop="static">
+                                            <!-- Pay Now -->
+                                            <div class="modal-dialog d-flex justfy-content-center align-items-center"
+                                                style="height: 90vh;">
+                                                <div class="modal-content brown">
+                                                    <section class="modal-header bg_light_orange_1">
+                                                        <h4 class="modal-title bold">Pay Now</h4>
+                                                        <button type="button" class="btn-cust close"
+                                                            data-dismiss="modal">&times;</button>
+                                                    </section>
+                                                    <form method="POST">
+                                                        {% csrf_token %}
+                                                        <section class="modal-body">
+                                                            <div class="form-group col-6">
+                                                                <h5 class="bold my-2">Total Amount :
+                                                                    {{ booking.amount }}</h5>
+                                                            </div>
+                                                            <div class="form-group col-6">
+                                                                {{ form.payment_mode|as_crispy_field }}
+                                                            </div>
+                                                        </section>
+                                                        <section class="modal-footer bg_light_orange_1">
+                                                            <input class="btn btn-cust btn-primary rounded-pill btn-sm"
+                                                                value="Pay&nbsp;Now" type="submit">
+                                                            <button type="button"
+                                                                class="btn btn-cust btn-warning rounded-pill btn-sm"
+                                                                data-dismiss="modal">Cancel</button>
+                                                        </section>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endif %}
                                     </tbody>
                                 </table>
                             </div>

@@ -134,6 +134,17 @@
                                                 {{ booking.booked_on }}
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <th class="px-0" scope="row">Payment Status</th>
+                                            <th>:</th>
+                                            <td class="px-0">
+                                                {% if payments.status == "paid" %}
+                                                {{ payments.status }}
+                                                {% else %}
+                                                Not Paid
+                                                {% endif %}
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
