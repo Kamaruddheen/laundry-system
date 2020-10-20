@@ -19,11 +19,6 @@ class Booking(models.Model):
     status = models.CharField(max_length=20, choices=status_choice,
                               default=status_choice[0][0])
     booked_on = models.DateTimeField(auto_now_add=True)
-    # address = models.CharField(User.address, max_length=100)
-    # street = models.CharField(User.street, max_length=50)
-    # city = models.CharField(User.city, max_length=50)
-    # state = models.CharField(User.state, max_length=50)
-    # pincode = models.CharField(User.pincode, max_length=6)
 
     class Meta:
         verbose_name = 'Booking'

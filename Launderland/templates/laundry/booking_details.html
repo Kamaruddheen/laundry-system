@@ -30,7 +30,7 @@
                             <small>Name : {{ booking.assigned_staff.first_name }}
                                 {{ booking.assigned_staff.last_name }}</small>
                         </div>
-                        {% if booking.status != 'delivered' and booking.status != 'canceled' %}
+                        {% if booking.status != 'delivered' and booking.status != 'canceled' and booking.status != 'cleaning' %}
                         <div class="mt-2">
                             <small>Contact : {{ booking.assigned_staff.mobile }}</small>
                         </div>
