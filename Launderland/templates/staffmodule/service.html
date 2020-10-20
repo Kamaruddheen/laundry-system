@@ -91,7 +91,7 @@
                                     <input type="button" name="submit" value="Delete" class="btn btn-cust red bold"
                                         data-toggle="modal" data-target="#del{{ data.id }}">
                                 </td>
-                                {% elif user.user_type == 2 %}
+                                {% else %}
                                 <td>{{ data.service }}</td>
                                 <td>
                                     <a class="nav-link p-0" href="{% url 'staffmodule:subservices' data.id %}">

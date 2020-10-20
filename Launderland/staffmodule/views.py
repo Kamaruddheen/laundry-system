@@ -14,7 +14,6 @@ def staff_dashboard(request):
     return render(request, 'staffmodule/index.html')
 
 
-@user_is_staff
 def service_view(request):
     services = Service.objects.all()
     form = ServiceForm(request.POST or None)
@@ -54,7 +53,6 @@ def service_delete(request, id):
     return redirect('staffmodule:service')
 
 
-@user_is_staff
 def sub_service_view(request, id):
     sub_service = Subservice.objects.filter(service=id)
     form = SubServiceForm(request.POST or None)

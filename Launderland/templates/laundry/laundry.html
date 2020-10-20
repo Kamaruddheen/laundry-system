@@ -7,7 +7,7 @@
 
 {% block content %}
 
-<body id="bookings">
+<body id="dashboard">
     <!-- ? Title -->
     <article class="bg_light_orange_2 container-fluid py-2">
         <section class="pr-md-auto pl-md-5 text-center text-md-left">
@@ -16,56 +16,95 @@
     </article>
     <article class="container-fluid my-2">
         <div class="row d-flex justify-content-center">
-            <a href="{% url 'laundry:mybooking'%}" class="card card-cust bg-transparent border-0 m-1"
-                style="width: 18rem;">
-                <div class="card-body bg_light_orange_1 text-center brown rounded">
-                    <div class="mx-auto img_body d-flex">
-                        <img src="{% static 'images/booking.png' %}" class="rounded" width="250"
-                            alt="{{ staff.first_name }} image" style="z-index:500">
-                    </div>
-                    <h5 class="card-title pt-2">My Bookings</h5>
-                </div>
-            </a>
-            <section class="card card-cust bg-transparent border-0 m-1" style="width: 18rem;">
-                <div class="card-body bg_light_orange_1 text-center brown rounded">
-                    <div class="mx-auto img_body d-flex">
-                        <img src="{% static 'images/booking.png' %}" class="rounded" width="250"
-                            alt="{{ staff.first_name }} image" style="z-index:500">
-                    </div>
-                    <h5 class="card-title pt-2">Delivery</h5>
-                </div>
-            </section>
-            <section class="card card-cust bg-transparent border-0 m-1" style="width: 18rem;">
-                <div class="card-body bg_light_orange_1 text-center brown rounded">
-                    <div class="mx-auto img_body d-flex">
-                        <img src="{% static 'images/booking.png' %}" class="rounded" width="250"
-                            alt="{{ staff.first_name }} image" style="z-index:500">
-                    </div>
-                    <h5 class="card-title pt-2">Payment History</h5>
-                </div>
-            </section>
-            {% if user.user_type == 1 %}
-            <a href="{% url 'customermodule:customer_list'%}" class="card card-cust bg-transparent border-0 m-1"
-                style="width: 18rem;">
-                <div class="card-body bg_light_orange_1 text-center brown rounded">
-                    <div class="mx-auto img_body d-flex">
-                        <img src="{% static 'images/booking.png' %}" class="rounded" width="250"
-                            alt="{{ staff.first_name }} image" style="z-index:500">
-                    </div>
-                    <h5 class="card-title pt-2">Customers</h5>
-                </div>
-            </a>
-            <a href="{% url 'staffmodule:staff_list'%}" class="card card-cust bg-transparent border-0 m-1"
-                style="width: 18rem;">
-                <div class="card-body bg_light_orange_1 text-center brown rounded">
-                    <div class="mx-auto img_body d-flex">
-                        <img src="{% static 'images/booking.png' %}" class="rounded" width="250"
-                            alt="{{ staff.first_name }} image" style="z-index:500">
-                    </div>
-                    <h5 class="card-title pt-2">Staffs</h5>
-                </div>
-            </a>
-            {% endif %}
+            {% if user.user_type == 1 or user.user_type ==  2 %}
+            <a href="{% url 'laundry:staff_all_booking'%}" class="nav-link btn-cust">
+                {% else %}
+                <a href="{% url 'laundry:mybooking'%}" class="nav-link btn-cust">
+                    {% endif %}
+                    <section class="card card-cust bg_light_orange_1 border-0 m-1" style="width: 18rem;">
+                        <div class="card-body bg_light_orange_1 text-center brown rounded">
+                            <div class="mx-auto img_body d-flex justify-content-center">
+                                {% if user.user_type == 1 or user.user_type ==  2 %}
+                                <img src="{% static 'images/staff_booking.svg' %}" class="rounded" width="180"
+                                    alt="{{ staff.first_name }} image">
+                                {% else %}
+                                <img src="{% static 'images/customer_booking.svg' %}" class="rounded" width="155"
+                                    alt="{{ staff.first_name }} image">
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <h5 class="card-title brown bold">My Bookings</h5>
+                        </div>
+                    </section>
+                </a>
+                <a href="{% url 'staffmodule:service'%}" class="nav-link btn-cust">
+                    <section class="card card-cust bg_light_orange_1 border-0 m-1" style="width: 18rem;">
+                        <div class="card-body bg_light_orange_1 text-center brown rounded">
+                            <div class="mx-auto img_body d-flex justify-content-center">
+                                <img src="{% static 'images/service.svg' %}" class="rounded" width="152"
+                                    alt="{{ staff.first_name }} image" style="z-index:500">
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <h5 class="card-title brown bold">Services</h5>
+                        </div>
+                    </section>
+                </a>
+                <a href="#" class="nav-link btn-cust">
+                    <section class="card card-cust bg_light_orange_1 border-0 m-1" style="width: 18rem;">
+                        <div class="card-body bg_light_orange_1 text-center brown rounded">
+                            <div class="mx-auto img_body d-flex justify-content-center">
+                                <img src="{% static 'images/delivery.svg' %}" class="rounded" width="150"
+                                    alt="{{ staff.first_name }} image" style="z-index:500">
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <h5 class="card-title brown bold">Delivery</h5>
+                        </div>
+                    </section>
+                </a>
+                <a href="#" class="nav-link btn-cust">
+                    <section class="card card-cust bg_light_orange_1 border-0 m-1" style="width: 18rem;">
+                        <div class="card-body bg_light_orange_1 text-center brown rounded">
+                            <div class="mx-auto img_body d-flex justify-content-center">
+                                <img src="{% static 'images/payment.svg' %}" class="rounded" width="270"
+                                    alt="{{ staff.first_name }} image" style="z-index:500">
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <h5 class="card-title brown bold">Payment History</h5>
+                        </div>
+                    </section>
+                </a>
+                {% if user.user_type == 1 or user.user_type == 2 %}
+                <a href="{% url 'customermodule:customer_list'%}" class="nav-link btn-cust">
+                    <section class="card card-cust bg_light_orange_1 border-0 m-1" style="width: 18rem;">
+                        <div class="card-body bg_light_orange_1 text-center brown rounded">
+                            <div class="mx-auto img_body d-flex justify-content-center">
+                                <img src="{% static 'images/customer.svg' %}" class="rounded" width="150"
+                                    alt="{{ staff.first_name }} image" style="z-index:500">
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <h5 class="card-title brown bold">Customers</h5>
+                        </div>
+                    </section>
+                </a>
+                <a href="{% url 'staffmodule:staff_list'%}" class="nav-link btn-cust">
+                    <section class="card card-cust bg_light_orange_1 border-0 m-1" style="width: 18rem;">
+                        <div class="card-body bg_light_orange_1 text-center brown rounded">
+                            <div class="mx-auto img_body d-flex justify-content-center">
+                                <img src="{% static 'images/staff.svg' %}" class="rounded" width="280"
+                                    alt="{{ staff.first_name }} image" style="z-index:500">
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <h5 class="card-title brown bold">Staffs</h5>
+                        </div>
+                    </section>
+                </a>
+                {% endif %}
         </div>
     </article>
 </body>
