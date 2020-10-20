@@ -127,7 +127,7 @@ class MyaccountForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'mobile', 'email', 'gender',
-                  'address', 'street', 'city', 'state', 'pincode']
+                  'address', 'street', 'city', 'state', 'pincode', 'profile_pic']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -135,6 +135,7 @@ class MyaccountForm(forms.ModelForm):
         self.fields['email'].label = "Email Address"
         self.fields['first_name'].label = "First Name"
         self.fields['last_name'].label = "Last Name"
+        self.fields['profile_pic'].label = "Select your Profile picture :"
         self.fields['address'].label = "Address"
         self.fields['street'].label = "Street"
         self.fields['city'].label = "City"

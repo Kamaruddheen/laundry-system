@@ -95,6 +95,7 @@
                     </section>
                 </a>
                 {% endif %}
+                {% if user.is_authenticated %}
                 <a href="{% url 'laundry:payment' %}" class="nav-link btn-cust">
                     <section class="card card-cust bg_light_orange_1 border-0 m-1" style="width: 18rem;">
                         <div class="card-body bg_light_orange_1 text-center brown rounded">
@@ -108,6 +109,7 @@
                         </div>
                     </section>
                 </a>
+                {% endif %}
         </div>
     </article>
 </body>

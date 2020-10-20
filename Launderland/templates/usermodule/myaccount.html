@@ -23,6 +23,11 @@
                     </div>
                     {% csrf_token %}
                     <div class="form-row">
+                        <div class="input-group col-md-12 my-5">
+                            <div class="custom-file">
+                                {{ form.profile_pic|as_crispy_field }}
+                            </div>
+                        </div>
                         <div class="form-group bold col-md-12">Personal Details :</div>
                         <div class="form-group col-md-6">
                             {{ form.first_name|as_crispy_field }}
@@ -63,6 +68,19 @@
             </div>
         </div>
     </article>
-</body>
+    <script>
+        $(document).ready(function () {
+            $("#id_profile_pic").change(function () {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
 
+                    reader.onload = function (e) {
+                        $('#img-cust').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+        });
+    </script>
+</body>
 {% endblock %}

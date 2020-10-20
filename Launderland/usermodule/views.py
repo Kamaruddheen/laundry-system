@@ -72,7 +72,8 @@ def staff_signup(request):
 @login_required
 def account_profile(request):
     instance = User.objects.get(id=request.user.id)
-    form = MyaccountForm(request.POST or None, instance=instance)
+    form = MyaccountForm(request.POST or None,
+                         request.FILES or None, instance=instance)
     if form.is_valid():
         form.save()
         messages.success(request, "Account updated successfully!")
