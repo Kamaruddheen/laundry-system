@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from usermodule.decorators import *
 from usermodule.forms import User
@@ -53,6 +54,17 @@ def Mybookings(request):
     bookings = Booking.objects.filter(
         cust_id=request.user.id).order_by('booked_on').reverse()
     return render(request, 'laundry/booking_list.html', {'bookings': bookings})
+
+
+@login_required
+def payment_list(request):
+    payments = None
+    if request.user.user_type == 1 or request.user.user_type == 2:
+        payments = Payment.objects.all().order_by('paid_date').reverse()
+    elif request.user.user_type == 3:
+        payments = Payment.objects.filter(
+            cust_id=request.user.id).order_by('paid_date').reverse()
+    return render(request, 'laundry/payment.html', {'payments': payments})
 
 
 @user_is_customer

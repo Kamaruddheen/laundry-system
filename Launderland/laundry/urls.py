@@ -12,6 +12,8 @@ urlpatterns = [
     path('booking/', Bookings, name='booking'),
     path('mybookings/', Mybookings, name='mybooking'),
     path('mybookings/<int:id>/', Booking_details, name='booking_details'),
+    # * Customer Payment Details
+    path('payments/', payment_list, name='payment'),
     # * Staff Booking Details
     path('staff_all_booking/', staff_all_booking, name='staff_all_booking'),
     path('staff_all_booking/<int:id>/edit',

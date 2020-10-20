@@ -16,8 +16,9 @@
     </article>
     <article class="container-fluid my-2">
         <div class="row d-flex justify-content-center">
+            <!-- * For Customer to Book a laundry Now -->
             {% if user.user_type == 3 %}
-            <a href="{% url 'laundry:booking'%}" class="nav-link btn-cust">
+            <a href="{% url 'laundry:booking' %}" class="nav-link btn-cust">
                 <section class="card card-cust bg_light_orange_1 border-0 m-1" style="width: 18rem;">
                     <div class="card-body bg_light_orange_1 text-center brown rounded">
                         <div class="mx-auto img_body d-flex justify-content-center">
@@ -32,9 +33,9 @@
             </a>
             {% endif %}
             {% if user.user_type == 1 or user.user_type ==  2 %}
-            <a href="{% url 'laundry:staff_all_booking'%}" class="nav-link btn-cust">
+            <a href="{% url 'laundry:staff_all_booking' %}" class="nav-link btn-cust">
                 {% else %}
-                <a href="{% url 'laundry:mybooking'%}" class="nav-link btn-cust">
+                <a href="{% url 'laundry:mybooking' %}" class="nav-link btn-cust">
                     {% endif %}
                     <section class="card card-cust bg_light_orange_1 border-0 m-1" style="width: 18rem;">
                         <div class="card-body bg_light_orange_1 text-center brown rounded">
@@ -66,21 +67,8 @@
                         </div>
                     </section>
                 </a>
-                <a href="#" class="nav-link btn-cust">
-                    <section class="card card-cust bg_light_orange_1 border-0 m-1" style="width: 18rem;">
-                        <div class="card-body bg_light_orange_1 text-center brown rounded">
-                            <div class="mx-auto img_body d-flex justify-content-center">
-                                <img src="{% static 'images/payment.svg' %}" class="rounded" width="270"
-                                    alt="{{ staff.first_name }} image" style="z-index:500">
-                            </div>
-                        </div>
-                        <div class="card-footer text-center">
-                            <h5 class="card-title brown bold">Payment History</h5>
-                        </div>
-                    </section>
-                </a>
                 {% if user.user_type == 1 or user.user_type == 2 %}
-                <a href="{% url 'staffmodule:staff_list'%}" class="nav-link btn-cust">
+                <a href="{% url 'staffmodule:staff_list' %}" class="nav-link btn-cust">
                     <section class="card card-cust bg_light_orange_1 border-0 m-1" style="width: 18rem;">
                         <div class="card-body bg_light_orange_1 text-center brown rounded">
                             <div class="mx-auto img_body d-flex justify-content-center">
@@ -93,7 +81,7 @@
                         </div>
                     </section>
                 </a>
-                <a href="{% url 'customermodule:customer_list'%}" class="nav-link btn-cust">
+                <a href="{% url 'customermodule:customer_list' %}" class="nav-link btn-cust">
                     <section class="card card-cust bg_light_orange_1 border-0 m-1" style="width: 18rem;">
                         <div class="card-body bg_light_orange_1 text-center brown rounded">
                             <div class="mx-auto img_body d-flex justify-content-center">
@@ -107,6 +95,19 @@
                     </section>
                 </a>
                 {% endif %}
+                <a href="{% url 'laundry:payment' %}" class="nav-link btn-cust">
+                    <section class="card card-cust bg_light_orange_1 border-0 m-1" style="width: 18rem;">
+                        <div class="card-body bg_light_orange_1 text-center brown rounded">
+                            <div class="mx-auto img_body d-flex justify-content-center">
+                                <img src="{% static 'images/payment.svg' %}" class="rounded" width="270"
+                                    alt="{{ staff.first_name }} image" style="z-index:500">
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <h5 class="card-title brown bold">Payment History</h5>
+                        </div>
+                    </section>
+                </a>
         </div>
     </article>
 </body>
