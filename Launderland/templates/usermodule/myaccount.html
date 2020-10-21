@@ -14,10 +14,16 @@
             <h3 class="brown mb-0 clamp_size_header">Account Details</h3>
         </section>
     </article>
+    <div class="container py-3">
+        <div class="float-right">
+            <a href="{% url 'usermodule:change_password' %}"
+                class="nav-link brown btn btn-cust bg_orange_1 rounded-pill btn-sm bold">Change
+                Password <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
     <article class="container mt-5 px-sm-1">
         <div class="card brown d-flex justify-content-center align-items-center bg-transparent border-0">
             <div class="card-body bg_light_orange_2 rounded mb-3">
-                <a href="{% url 'usermodule:change_password' %}">Change Password</a>
                 <form method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
                     <!-- * Showcase Image -->
                     <div class="d-flex align-items-center justify-content-around mb-4">
@@ -64,8 +70,8 @@
                             {{ form.pincode|as_crispy_field }}
                         </div>
                     </div>
-                    <button type="submit" class="btn bg_orange_1 btn-cust btn-block mb-3">
-                        Register
+                    <button type="submit" class="btn bg_orange_1 btn-cust btn-block mb-3 brown rounded-pill bold">
+                        Save
                     </button>
                 </form>
             </div>

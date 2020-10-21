@@ -1,17 +1,11 @@
 from usermodule.models import User
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, render, redirect
-
-from .forms import *
-from .models import *
 from usermodule.decorators import user_is_staff, user_is_owner
 from django.utils.timezone import now, timedelta
 
-
-# ? staff_homepage
-@user_is_staff
-def staff_homepage(request):
-    return render(request, 'staffmodule/index.html')
+from .forms import *
+from .models import *
 
 
 # all user can view service

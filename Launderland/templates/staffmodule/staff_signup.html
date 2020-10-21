@@ -3,18 +3,21 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-<title>Launder land | Staff | Sign Up</title>
+<title>Launder land | Owner | Create Staff Account</title>
 {% endblock %}
 
 {% block content %}
 
 <body id="staff">
-    <!-- ? Sign Up Form -->
-    <article class="container my- px-sm-1">
+    <!-- ? Title -->
+    <article class="bg_light_orange_2 container-fluid py-2">
+        <section class="pr-md-auto pl-md-5 text-center text-md-left">
+            <h3 class="brown mb-0 clamp_size_header">Create a Staff Account</h3>
+        </section>
+    </article>
+    <!-- ? Staff Sign Up Form -->
+    <article class="container my-5 px-sm-1">
         <div class="card brown d-flex justify-content-center align-items-center bg-transparent border-0">
-            <div class="card-header text-center border-bottom-0 bg-transparent">
-                <h5 class="clamp_size_header">Sign Up</h5>
-            </div>
             <div class="card-body bg_light_orange_2 rounded">
                 <form method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
                     <!-- * Showcase Image -->
@@ -75,7 +78,7 @@
 
     <script>
         $(document).ready(function () {
-            $("#id_profie_pic").change(function () {
+            $("#id_profile_pic").change(function () {
                 if (this.files && this.files[0]) {
                     var reader = new FileReader();
 

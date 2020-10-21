@@ -27,10 +27,11 @@
                         alt="{{ book.assigned_staff.first_name }} image" style="z-index:500">
                 </div>
                 <div class="card-body bg_light_orange_1 text-center brown rounded">
-                    <h5 class="card-title pt-5">Incharge : {{ book.assigned_staff.first_name }}</h5>
+                    <h5 class="card-title pt-5">Booking id : {{ book.id }}</h5>
+                    <h5 class="card-title">Incharge : {{ book.assigned_staff.first_name }}</h5>
                     <h5 class="card-title">Contact : {{ book.assigned_staff.mobile }}</h5>
                     <a href="{% url 'laundry:booking_details' book.id %}"
-                        class="btn btn-cust btn-sm bg_orange_1 rounded-pill brown bold">View
+                        class="btn btn-cust mt-3 btn-sm bg_orange_1 rounded-pill brown bold">View
                         Details</a>
                 </div>
                 <div class="card-footer bg_light_orange_1 brown">

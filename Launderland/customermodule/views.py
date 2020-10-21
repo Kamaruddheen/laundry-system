@@ -2,17 +2,17 @@ from usermodule.models import User
 from django.shortcuts import get_object_or_404, render
 
 from .models import *
-from usermodule.decorators import user_is_staff
+from usermodule.decorators import user_is_owner
 from django.utils.timezone import now, timedelta
 
 
-@user_is_staff
+@user_is_owner
 def customer_list(request):
     customers = User.objects.filter(user_type=3)
     return render(request, 'customermodule/customer_list.html', {'customers': customers})
 
 
-@user_is_staff
+@user_is_owner
 def customer_details(request, id):
     customer = get_object_or_404(User, id=id)
     status_time = (now() - timedelta(hours=24)

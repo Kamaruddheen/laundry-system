@@ -81,6 +81,23 @@
                         </div>
                     </section>
                 </a>
+                {% endif %}
+                {% if user.is_authenticated %}
+                <a href="{% url 'laundry:payment' %}" class="nav-link btn-cust">
+                    <section class="card card-cust bg_light_orange_1 border-0 m-1" style="width: 18rem;">
+                        <div class="card-body bg_light_orange_1 text-center brown rounded">
+                            <div class="mx-auto img_body d-flex justify-content-center">
+                                <img src="{% static 'images/payment.svg' %}" class="rounded" width="270"
+                                    alt="{{ staff.first_name }} image" style="z-index:500">
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <h5 class="card-title brown bold">Payment History</h5>
+                        </div>
+                    </section>
+                </a>
+                {% endif %}
+                {% if user.user_type == 1 %}
                 <a href="{% url 'customermodule:customer_list' %}" class="nav-link btn-cust">
                     <section class="card card-cust bg_light_orange_1 border-0 m-1" style="width: 18rem;">
                         <div class="card-body bg_light_orange_1 text-center brown rounded">
@@ -94,18 +111,16 @@
                         </div>
                     </section>
                 </a>
-                {% endif %}
-                {% if user.is_authenticated %}
-                <a href="{% url 'laundry:payment' %}" class="nav-link btn-cust">
+                <a href="{% url 'usermodule:signup_staff' %}" class="nav-link btn-cust">
                     <section class="card card-cust bg_light_orange_1 border-0 m-1" style="width: 18rem;">
                         <div class="card-body bg_light_orange_1 text-center brown rounded">
                             <div class="mx-auto img_body d-flex justify-content-center">
-                                <img src="{% static 'images/payment.svg' %}" class="rounded" width="270"
+                                <img src="{% static 'images/account.svg' %}" class="rounded" width="150"
                                     alt="{{ staff.first_name }} image" style="z-index:500">
                             </div>
                         </div>
                         <div class="card-footer text-center">
-                            <h5 class="card-title brown bold">Payment History</h5>
+                            <h5 class="card-title brown bold">Create Staff account</h5>
                         </div>
                     </section>
                 </a>

@@ -36,8 +36,11 @@ def account_signin(request):
                 if next_link:
                     return redirect(next_link)
                 else:
-                    messages.success(request, "Signed In as Staff")
-                    return redirect('staffmodule:staff_homepage')
+                    if user.user_type == 1:
+                        messages.success(request, "Signed In as Owner (Admin)")
+                    elif user.user_type == 2:
+                        messages.success(request, "Signed In as Staff")
+                    return redirect('homepage')
             if user.user_type == 3:
                 if next_link:
                     return redirect(next_link)

@@ -4,8 +4,6 @@ from .views import *
 app_name = 'staffmodule'
 
 urlpatterns = [
-    #  ? STAFF HOMEPAGE [DASHBOARD]
-    path('', staff_homepage, name="staff_homepage"),
     #  ? SERVICES
     path('services/', service_view, name="service"),
     path('services/<int:id>/edit/', service_edit, name="service_edit"),
