@@ -12,7 +12,11 @@
     <!-- ? Sub Service Title -->
     <article class="bg_light_orange_2 container-fluid py-2">
         <section class="pr-md-auto pl-md-5 text-center text-md-left">
-            <h3 class="brown mb-0 clamp_size_header">Sub service</h3>
+            {% for data in sub_service %}
+            {% if forloop.first %}
+            <h3 class="brown mb-0 clamp_size_header">Sub service of {{ data.service }}</h3>
+            {% endif %}
+            {% endfor %}
         </section>
     </article>
     <!-- ? List of Sub services -->

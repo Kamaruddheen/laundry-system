@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-<title>Launder land | My Bookings</title>
+<title>Launder land | My Orders</title>
 {% endblock %}
 
 {% block content %}
@@ -12,12 +12,12 @@
     <!-- ? My Bookings Title -->
     <article class="bg_light_orange_2 container-fluid py-2">
         <section class="pr-md-auto pl-md-5 text-center text-md-left">
-            <h3 class="brown mb-0 clamp_size_header">My Bookings</h3>
+            <h3 class="brown mb-0 clamp_size_header">My Orders</h3>
         </section>
     </article>
     <article class="container-fluid my-2">
         <a href="{% url 'laundry:booking'%}"
-            class="btn btn-sm col-lg-1 col-md-2 col-sm-3 brown nav-link btn-cust bg_orange_1 bold rounded-pill my-2">Book&nbsp;Now</a>
+            class="btn btn-sm col-lg-1 col-md-2 col-sm-3 brown nav-link btn-cust bg_orange_1 bold rounded-pill my-2">Order&nbsp;Now</a>
         {% if bookings %}
         <div class="row d-flex justify-content-center">
             {% for book in bookings %}
@@ -27,7 +27,7 @@
                         alt="{{ book.assigned_staff.first_name }} image" style="z-index:500">
                 </div>
                 <div class="card-body bg_light_orange_1 text-center brown rounded">
-                    <h5 class="card-title pt-5">Booking id : {{ book.id }}</h5>
+                    <h5 class="card-title pt-5">Order id : {{ book.id }}</h5>
                     <h5 class="card-title">Incharge : {{ book.assigned_staff.first_name }}</h5>
                     <h5 class="card-title">Contact : {{ book.assigned_staff.mobile }}</h5>
                     <a href="{% url 'laundry:booking_details' book.id %}"
@@ -56,7 +56,7 @@
             {% endfor %}
             {% else %}
             <div class="row d-flex justify-content-center align-items-center" style="height: 50vh;">
-                <h4 class="bold brown"> You haven't booked anything</h4>
+                <h4 class="bold brown"> You haven't Ordered anything</h4>
                 {% endif %}
             </div>
     </article>

@@ -56,6 +56,8 @@ class SignupForm(forms.ModelForm):
         mobile = self.cleaned_data.get('mobile')
         if not len(mobile) == 10:
             raise forms.ValidationError('Enter a valid Mobile Number')
+        if not mobile.isnumeric():
+            raise forms.ValidationError('Mobile Number must be a Integer')
         return mobile
 
     # validating the password
@@ -102,6 +104,15 @@ class SigninForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['mobile'].label = "Mobile Number"
+
+    # validating the mobile no
+    def clean_mobile(self):
+        mobile = self.cleaned_data.get('mobile')
+        if not len(mobile) == 10:
+            raise forms.ValidationError('Enter a valid Mobile Number')
+        if not mobile.isnumeric():
+            raise forms.ValidationError('Mobile Number must be a Integer')
+        return mobile
 
 
 class MyaccountForm(forms.ModelForm):

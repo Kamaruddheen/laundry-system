@@ -33,11 +33,6 @@
                             <a class="{% if request.get_full_path == myaccount %}actives{% else %}brown{% endif %} nav-link header_big border-0 btn-cust text-center"
                                 href="{% url 'usermodule:myaccount' %}">Account</a>
                         </li>
-                        {% endif %}
-                        <li class="nav-item my-2 mx-lg-3 clamp_size">
-                            <a class="brown nav-link header_big border-0 btn-cust text-center" href="#">About Us</a>
-                        </li>
-                        {% if user.is_authenticated %}
                         <li class="nav-item my-2 mx-lg-3 clamp_size d-md-none">
                             <a class="brown nav-link header_big border-0 btn-cust text-center"
                                 href="{% url 'usermodule:signout' %}">Sign&nbsp;Out</a>

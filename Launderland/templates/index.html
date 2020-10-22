@@ -24,10 +24,10 @@
                     class="btn btn-lg btn-white mx-1 bg_light_orange_1 brown rounded-pill bold">Dashboard</a>
                 {% if user.user_type == 1 or user.user_type == 2 %}
                 <a href="{% url 'laundry:staff_all_booking' %}"
-                    class="btn btn-lg btn-cust bg_orange_1 mx-1 light_orange_1 rounded-pill bold">Check Bookings</a>
+                    class="btn btn-lg btn-cust bg_orange_1 mx-1 light_orange_1 rounded-pill bold">Check Orders</a>
                 {% else %}
                 <a href="{% url 'laundry:booking' %}"
-                    class="btn btn-lg btn-cust bg_orange_1 mx-1 light_orange_1 rounded-pill bold">Book Now</a>
+                    class="btn btn-lg btn-cust bg_orange_1 mx-1 light_orange_1 rounded-pill bold">Order Now</a>
                 {% endif %}
             </div>
         </div>
