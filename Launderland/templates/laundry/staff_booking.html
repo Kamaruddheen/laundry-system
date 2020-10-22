@@ -32,7 +32,7 @@
                                 {% endif %}
                                 <th scope="col">Delivery Type</th>
                                 <th scope="col">Amount</th>
-                                <th scope="col">Status</th>
+                                <th class="text-center" scope="col">Status</th>
                             </tr>
                         </thead>
                         <!-- * Table Content -->
@@ -51,11 +51,13 @@
                                 {% endif %}
                                 <td>{{ data.delivery_type }}</td>
                                 <td>&#x20B9; {{ data.amount|default:"-----" }}</td>
-                                <td><span class="badge rounded-pill mb-0
+                                <td class="text-center"><span class="badge rounded-pill mb-0
                                 {% if data.status == 'delivered' %}
                                 badge-success
                                 {% elif data.status == 'ready' %}
                                 badge-info
+                                {% elif data.status == 'New' %}
+                                bg_orange_1 light_orange_1
                                 {% elif data.status == 'cleaning' %}
                                 badge-secondary
                                 {% elif data.status == 'pickedup' %}

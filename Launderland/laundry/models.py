@@ -7,11 +7,11 @@ class Booking(models.Model):
     cust_id = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="cid")
     assigned_staff = models.ForeignKey(User, on_delete=models.CASCADE)
-    services = models.ForeignKey(Service, on_delete=models.SET_NULL, null=True)
+    services = models.ForeignKey(Service, on_delete=models.CASCADE)
     sub_service = models.ForeignKey(
-        Subservice, on_delete=models.SET_NULL, null=True)
+        Subservice, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
-    amount = models.FloatField(null=True, blank=True)
+    amount = models.FloatField(default=0)
     delivery_choice = (('pickup', 'Pickup (Self)'), ('door-step', 'Door Step'))
     delivery_type = models.CharField(choices=delivery_choice, max_length=30)
     status_choice = (('New', 'New'), ('pending', 'Pending'), ('cleaning', 'Cleaning'), ('pickedup', 'Picked Up'), ('canceled', 'Canceled'),
