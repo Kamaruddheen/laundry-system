@@ -67,7 +67,7 @@ def staff_signup(request):
         user_obj.password = make_password(user_obj.password)
         user_obj.user_type = 2
         user_obj.save()
-        return redirect('staffmodule:staff_homepage')
+        return redirect('homepage')
     return render(request, 'staffmodule/staff_signup.html', {'form': form})
 
 
