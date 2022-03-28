@@ -54,7 +54,7 @@ class User(AbstractUser):
     objects = UserManager()
 
     USERNAME_FIELD = 'mobile'
-    REQUIRED_FIELDS = ['first_name']
+    REQUIRED_FIELDS = ['first_name', 'user_type']
 
     class Meta:
         verbose_name = 'User'
